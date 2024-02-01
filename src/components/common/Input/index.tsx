@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef } from 'react';
 
 import styled from '@emotion/styled';
 
-import { useInput } from '../../hooks/useInput';
+import { useInput } from '../../../hooks/useInput';
 
 import BottomBorder from '../BottomBorder';
 

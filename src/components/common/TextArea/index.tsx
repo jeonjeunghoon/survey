@@ -4,8 +4,8 @@ import styled from '@emotion/styled';
 
 import BottomBorder from '../BottomBorder';
 
-import { useResizeTextAreaHeight } from '../../hooks/useResizeTextAreaHeight';
-import { useInput } from '../../hooks/useInput';
+import { useResizeTextAreaHeight } from '../../../hooks/useResizeTextAreaHeight';
+import { useInput } from '../../../hooks/useInput';
 
 type Props = {
   fontSize?: string;
