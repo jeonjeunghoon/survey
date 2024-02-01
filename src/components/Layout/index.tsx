@@ -8,11 +8,9 @@ export default function Layout({ children }: PropsWithChildren) {
 
 const S = {
   Layout: styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     height: 100%;
 
+    overflow-x: auto;
     background-color: ${({ theme }) => theme.colors.background};
   `,
 };
