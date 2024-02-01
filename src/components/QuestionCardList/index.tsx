@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 
 import { RootState } from '../../store';
 
-import FormCard from '../FormCard';
+import QuestionCard from '../QuestionCard';
 
-export default function QuestionList() {
+export default function QuestionCardList() {
   const { questionList } = useSelector((state: RootState) => state.form);
 
   if (!questionList || !questionList.length) return null;
@@ -15,7 +15,12 @@ export default function QuestionList() {
       {questionList.map(({ id, type, question, optionList, isRequired }) => {
         return (
           <S.Item key={id}>
-            <FormCard>{`${type} ${question} ${optionList} ${isRequired}`}</FormCard>
+            <QuestionCard
+              type={type}
+              question={question}
+              optionList={optionList}
+              isRequired={isRequired}
+            />
           </S.Item>
         );
       })}

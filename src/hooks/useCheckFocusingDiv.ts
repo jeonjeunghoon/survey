@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-export const useFormCardFocus = (initialFocus: boolean) => {
+export const useCheckFocusingDiv = (initialFocus: boolean) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isFocus, setIsFocus] = useState(initialFocus);
 

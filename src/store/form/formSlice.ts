@@ -1,14 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-export type QuestionType = 'singleChoice' | 'shortAnswer' | 'longAnswer' | 'checkbox' | 'dropdown';
-
-type Question = {
-  id: number;
-  type: QuestionType;
-  question: string;
-  optionList: string[] | null;
-  isRequired: boolean;
-};
+import { Question } from '../../types/question';
 
 type FormState = {
   title: string;

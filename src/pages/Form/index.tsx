@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 import FormPanel from '../../components/FormPanel';
 import FormCard from '../../components/FormCard';
-import QuestionList from '../../components/QuestionList';
+import QuestionCardList from '../../components/QuestionCardList';
 import FormTitle from '../../components/FormTitle';
 
 export default function Form() {
@@ -12,7 +12,7 @@ export default function Form() {
       <FormCard isTitle>
         <FormTitle />
       </FormCard>
-      <QuestionList />
+      <QuestionCardList />
     </S.Container>
   );
 }

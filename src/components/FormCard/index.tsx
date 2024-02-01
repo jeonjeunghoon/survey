@@ -2,14 +2,14 @@ import { PropsWithChildren } from 'react';
 
 import styled from '@emotion/styled';
 
-import { useFormCardFocus } from '../../hooks/useFormCardFocus';
+import { useCheckFocusingDiv } from '../../hooks/useCheckFocusingDiv';
 
 type Props = {
   isTitle?: boolean;
 } & PropsWithChildren;
 
 export default function FormCard({ isTitle = false, children }: Props) {
-  const { ref, isFocus } = useFormCardFocus(isTitle);
+  const { ref, isFocus } = useCheckFocusingDiv(isTitle);
 
   return (
     <S.Section ref={ref}>

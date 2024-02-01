@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { RootState } from '../../store';
 
-import Input from '../Input';
+import TextArea from '../common/TextArea';
 
 export default function FormTitle() {
   const { title, description } = useSelector((state: RootState) => state.form);
@@ -11,10 +11,10 @@ export default function FormTitle() {
   return (
     <S.InputContainer>
       <S.Title>
-        <Input fontSize='3.6rem' placeholder='설문지 제목' initialValue={title} />
+        <TextArea fontSize='3.6rem' placeholder='설문지 제목' initialValue={title} />
       </S.Title>
       <S.Description>
-        <Input placeholder='설문지 설명' initialValue={description} />
+        <TextArea placeholder='설문지 설명' initialValue={description} />
       </S.Description>
     </S.InputContainer>
   );

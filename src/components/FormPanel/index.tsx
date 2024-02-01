@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { addSingleChoiceQuestion } from '../../store/form/formSlice';
 
 import AddButtonIcon from '../../assets/svg/add-button.svg?react';
-import Button from '../Button';
+import Button from '../common/Button';
 
 export default function FormPanel() {
   const dispatch = useDispatch();
