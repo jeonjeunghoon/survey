@@ -1,7 +1,9 @@
 import { ReactElement } from 'react';
+import { QuestionType } from './question';
 
 export type DropdownMenu = {
   icon: ReactElement | null;
   text: string;
-  handleClick: () => void;
+  type: QuestionType;
+  handleClick: (selectedType: QuestionType) => void;
 };

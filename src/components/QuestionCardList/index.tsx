@@ -16,6 +16,7 @@ export default function QuestionCardList() {
         return (
           <S.Item key={id}>
             <QuestionCard
+              id={id}
               type={type}
               question={question}
               optionList={optionList}

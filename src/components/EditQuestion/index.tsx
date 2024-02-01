@@ -1,32 +1,39 @@
 import styled from '@emotion/styled';
 
-import { QuestionType } from '../../types/question';
+import { Question } from '../../types/question';
 
 import TextArea from '../common/TextArea';
 import Answer from '../Answer';
 import OptionList from '../OptionList';
+import Dropdown from '../common/Dropdown';
+
+import { useQuestionTypeSet } from '../../hooks/useQuestionTypeSet';
 
 type Props = {
-  type: QuestionType;
-  question: string;
-  optionList: string[] | null;
   isFocus: boolean;
-};
+} & Omit<Question, 'isRequired'>;
 
-export default function EditQuestion({ type, question, optionList, isFocus }: Props) {
+export default function EditQuestion({ id, type, question, optionList, isFocus }: Props) {
+  const questionType = useQuestionTypeSet(id);
+
   return (
     <>
-      <S.QuestionWrapper>
-        <TextArea
-          fontSize='1.6rem'
-          fontWeight={500}
-          initialValue={question}
-          backgroundColor='#F2F2F2'
-          margin='16px'
-          placeholder='질문'
-          isFocus={isFocus}
-        />
-      </S.QuestionWrapper>
+      <S.HeaderContainer>
+        <S.QuestionWrapper>
+          <TextArea
+            fontSize='1.6rem'
+            fontWeight={500}
+            initialValue={question}
+            backgroundColor='#F2F2F2'
+            margin='16px'
+            placeholder='질문'
+            isFocus={isFocus}
+          />
+        </S.QuestionWrapper>
+        <S.DropdownWrapper>
+          <Dropdown dropdownMenuList={questionType.list} defaultMenu={questionType.default} />
+        </S.DropdownWrapper>
+      </S.HeaderContainer>
       {type === 'shortAnswer' || type === 'longAnswer' ? (
         <Answer type={type} />
       ) : (
@@ -37,11 +44,20 @@ export default function EditQuestion({ type, question, optionList, isFocus }: Pr
 }
 
 const S = {
+  HeaderContainer: styled.div`
+    display: flex;
+    justify-content: space-between;
+  `,
+
   QuestionWrapper: styled.div`
-    width: 446px;
+    min-width: 446px;
 
     textarea {
       padding: 8px 0;
     }
+  `,
+
+  DropdownWrapper: styled.div`
+    width: 208px;
   `,
 };

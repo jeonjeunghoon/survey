@@ -16,7 +16,7 @@ export default function MenuList({ dropdownMenuList, closeMenu, changeSelectedMe
       {dropdownMenuList.map((menu) => {
         const handleMenuClick = () => {
           closeMenu();
-          menu.handleClick();
+          menu.handleClick(menu.type);
           changeSelectedMenu(menu);
         };
 
@@ -25,7 +25,7 @@ export default function MenuList({ dropdownMenuList, closeMenu, changeSelectedMe
             key={menu.text}
             icon={menu.icon}
             text={menu.text}
-            handleClick={handleMenuClick}
+            handleMenuClick={handleMenuClick}
           />
         );
       })}

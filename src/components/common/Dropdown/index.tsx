@@ -8,7 +8,7 @@ import MenuItem from './MenuItem';
 
 type Props = {
   dropdownMenuList: DropdownMenu[];
-  defaultMenu?: DropdownMenu;
+  defaultMenu?: Omit<DropdownMenu, 'handleClick'>;
 };
 
 export default function Dropdown({ dropdownMenuList, defaultMenu = dropdownMenuList[0] }: Props) {
@@ -24,7 +24,7 @@ export default function Dropdown({ dropdownMenuList, defaultMenu = dropdownMenuL
           changeSelectedMenu={changeSelectedMenu}
         />
       )}
-      <MenuItem icon={selectedMenu.icon} text={selectedMenu.text} handleClick={showMenu} />
+      <MenuItem icon={selectedMenu.icon} text={selectedMenu.text} handleMenuClick={showMenu} />
       <S.ArrowWrapper></S.ArrowWrapper>
     </S.Container>
   );

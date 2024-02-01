@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { Question } from '../../types/question';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+import { Question, QuestionType } from '../../types/question';
 
 type FormState = {
   title: string;
@@ -39,7 +40,16 @@ export const formSlice = createSlice({
       if (!state.questionList) state.questionList = [NEW_QUESTION];
       else state.questionList.push(NEW_QUESTION);
     },
-    editType: () => {},
+    editType: (state, action: PayloadAction<{ id: number; questionType: QuestionType }>) => {
+      const { id, questionType } = action.payload;
+
+      if (!state.questionList) return;
+
+      const target = state.questionList?.findIndex((question) => question.id === id);
+
+      const newQuestion = { ...state.questionList[target], type: questionType };
+      state.questionList[target] = newQuestion;
+    },
     editQuestion: () => {},
     editOption: () => {},
     pasteQuestion: () => {},

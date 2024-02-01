@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useCheckFocusingDiv } from './useCheckFocusingDiv';
 import { DropdownMenu } from '../types/dropdown';
 
-export const useDropdown = (defaultMenu: DropdownMenu) => {
+export const useDropdown = (defaultMenu: Omit<DropdownMenu, 'handleClick'>) => {
   const [selectedMenu, setSelectedMenu] = useState(defaultMenu);
   const [isOpen, setIsOpen] = useState(false);
   const { ref, isFocus } = useCheckFocusingDiv(false);

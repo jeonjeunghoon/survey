@@ -8,12 +8,7 @@ import FormCard from '../FormCard';
 import EditQuestion from '../EditQuestion';
 import ViewQuestion from '../ViewQuestion';
 
-export default function QuestionCard({
-  type,
-  question,
-  optionList,
-  isRequired,
-}: Omit<Question, 'id'>) {
+export default function QuestionCard({ id, type, question, optionList, isRequired }: Question) {
   const { ref, isFocus } = useCheckFocusingDiv(false);
 
   return (
@@ -21,7 +16,13 @@ export default function QuestionCard({
       <S.Container ref={ref}>
         <S.DragWrapper />
         {isFocus ? (
-          <EditQuestion type={type} question={question} optionList={optionList} isFocus={isFocus} />
+          <EditQuestion
+            id={id}
+            type={type}
+            question={question}
+            optionList={optionList}
+            isFocus={isFocus}
+          />
         ) : (
           <ViewQuestion type={type} question={question} optionList={optionList} />
         )}
