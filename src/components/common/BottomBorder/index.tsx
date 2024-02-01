@@ -1,14 +1,14 @@
 import styled from '@emotion/styled';
 
 type Props = {
-  onAnimation: boolean;
+  startAnimation: boolean;
 };
 
-export default function BottomBorder({ onAnimation }: Props) {
+export default function BottomBorder({ startAnimation }: Props) {
   return (
     <>
       <S.BottomBorder />
-      <S.BottomBorderAnimation onAnimation={onAnimation} />
+      <S.BottomBorderAnimation startAnimation={startAnimation} />
     </>
   );
 }
@@ -23,16 +23,16 @@ const S = {
     background-color: #e0e0e0;
   `,
 
-  BottomBorderAnimation: styled.div<{ onAnimation: boolean }>`
+  BottomBorderAnimation: styled.div<{ startAnimation: boolean }>`
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: ${({ onAnimation }) => onAnimation && '2px'};
+    height: ${({ startAnimation }) => startAnimation && '2px'};
 
     background-color: ${({ theme }) => theme.colors.primary};
 
-    transform: scaleX(${({ onAnimation }) => (onAnimation ? '1' : '0')});
-    animation: ${({ onAnimation }) => (onAnimation ? 'AddUnderline' : 'RemoveUnderline')} 0.3s
+    transform: scaleX(${({ startAnimation }) => (startAnimation ? '1' : '0')});
+    animation: ${({ startAnimation }) => (startAnimation ? 'AddUnderline' : 'RemoveUnderline')} 0.3s
       cubic-bezier(0.4, 0, 0.2, 1);
 
     @keyframes RemoveUnderline {
