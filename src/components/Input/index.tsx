@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 
-import { useInitializeTitle } from '../../hooks/useInitializeTitle';
 import { useInput } from '../../hooks/useInput';
 
 type Props = {
@@ -8,26 +7,22 @@ type Props = {
   fontSize?: string;
   isRequired?: boolean;
   hasTextEditor?: boolean;
+  initialValue?: string;
   placeholder?: string;
 };
 
 export default function Input({
   type = 'text',
-  fontSize = '1.4rem',
+  fontSize = '1.6rem',
   isRequired = false,
+  initialValue = '',
   placeholder,
   ...rest
 }: Props) {
-  const { value, setValue, isFocus, handleFocus, handleBlur } = useInput();
-  const isTitle = placeholder === '설문지 제목';
-  useInitializeTitle({
-    isEmpty: value === '',
-    isTitle,
-    setValue,
-  });
+  const { value, setValue, isFocus, handleFocus, handleBlur } = useInput(initialValue);
 
   return (
-    <S.Container isTitle={isTitle}>
+    <S.Container>
       <S.Input
         type={type}
         value={value}
@@ -39,43 +34,44 @@ export default function Input({
         onBlur={handleBlur}
         {...rest}
       />
-      <S.BottomBorder isTitle={isTitle} />
-      <S.BottomBorderAnimation isTitle={isTitle} isFocus={isFocus} />
+      <S.BottomBorder />
+      <S.BottomBorderAnimation isFocus={isFocus} />
     </S.Container>
   );
 }
 
 const S = {
-  Container: styled.div<{ isTitle: boolean }>`
+  Container: styled.div`
+    display: flex;
+    flex: 1;
     position: relative;
+    min-height: 1.5rem;
     margin-top: 8px;
-    padding-bottom: ${({ isTitle }) => (isTitle ? '8px' : '4px')};
   `,
 
   Input: styled.input<{ fontSize: string }>`
     width: 100%;
 
-    font-size: ${({ fontSize }) => fontSize};
     border: none;
     outline: none;
+    font-size: ${({ fontSize }) => fontSize};
+    letter-spacing: 0;
   `,
 
-  BottomBorder: styled.div<{ isTitle: boolean }>`
+  BottomBorder: styled.div`
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 1px;
-    margin-top: ${({ isTitle }) => (isTitle ? '8px' : '4px')};
 
     background-color: #e0e0e0;
   `,
 
-  BottomBorderAnimation: styled.div<{ isTitle: boolean; isFocus: boolean }>`
+  BottomBorderAnimation: styled.div<{ isFocus: boolean }>`
     position: absolute;
     bottom: 0;
     width: 100%;
     height: ${({ isFocus }) => isFocus && '2px'};
-    margin-top: ${({ isTitle }) => (isTitle ? '8px' : '4px')};
 
     background-color: ${({ theme }) => theme.colors.primary};
 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-export const useInput = () => {
-  const [value, setValue] = useState('');
+export const useInput = (initialValue: string) => {
+  const [value, setValue] = useState(initialValue);
   const [isFocus, setIsFocus] = useState(false);
 
   const handleFocus = () => setIsFocus(true);

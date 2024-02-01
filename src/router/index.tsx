@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import App from '../App';
-import Editor from '../pages/Editor';
+import Form from '../pages/Form';
 import Viewform from '../pages/Viewform';
 
 export default function Router() {
@@ -11,8 +11,8 @@ export default function Router() {
       element: <App />,
       children: [
         {
-          path: 'editor',
-          element: <Editor />,
+          path: 'form',
+          element: <Form />,
         },
         {
           path: 'viewform',
