@@ -53,6 +53,8 @@ const S = {
     border: 1px solid #dadce0;
     background-color: white;
 
+    z-index: 1;
+
     li {
       padding: 0 8px;
     }
