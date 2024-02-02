@@ -10,9 +10,10 @@ type Props = {
   type: QuestionType;
   text: string;
   index: number;
+  fontColor?: string;
 };
 
-export default function Option({ type, text, index }: Props) {
+export default function Option({ type, text, index, fontColor = 'black' }: Props) {
   const table = {
     [QUESTION_TYPE.객관식질문]: <CircleIcon stroke='#BDBDBD' fill='white' />,
     [QUESTION_TYPE.체크박스]: <SquareIcon stroke='#BDBDBD' fill='white' />,
@@ -22,7 +23,7 @@ export default function Option({ type, text, index }: Props) {
   return (
     <S.Option>
       <S.Head>{table[type]}</S.Head>
-      <S.Text>{text}</S.Text>
+      <S.Text fontColor={fontColor}>{text}</S.Text>
     </S.Option>
   );
 }
@@ -38,8 +39,9 @@ const S = {
 
   Head: styled.div``,
 
-  Text: styled.p`
+  Text: styled.p<{ fontColor: string }>`
     font-size: 1.6rem;
+    color: ${({ fontColor }) => fontColor};
   `,
 
   DropdownIndex: styled.p`

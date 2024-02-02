@@ -9,7 +9,9 @@ import TextArea from '../common/TextArea';
 import Answer from '../Answer';
 import OptionList from '../OptionList';
 import Dropdown from '../common/Dropdown';
-import { editQuestion } from '../../store/form/formSlice';
+import { addOption, editQuestion } from '../../store/form/formSlice';
+import Option from '../Option';
+import Button from '../common/Button';
 
 type Props = {
   isFocus: boolean;
@@ -23,6 +25,8 @@ export default function EditQuestion({ id, type, question, optionList, isFocus }
 
     dispatch(editQuestion({ id, question: value }));
   };
+
+  const addQuestionsOption = () => dispatch(addOption({ id }));
 
   return (
     <>
@@ -45,7 +49,21 @@ export default function EditQuestion({ id, type, question, optionList, isFocus }
       {type === QUESTION_TYPE.단답형 || type === QUESTION_TYPE.장문형 ? (
         <Answer type={type} />
       ) : (
-        <OptionList type={type} optionList={optionList} />
+        <>
+          <OptionList type={type} optionList={optionList} />
+          {isFocus && optionList && (
+            <div>
+              <Button onClick={addQuestionsOption}>
+                <Option
+                  type={type}
+                  text={'옵션 추가'}
+                  index={optionList.length}
+                  fontColor={'#70757A'}
+                />
+              </Button>
+            </div>
+          )}
+        </>
       )}
     </>
   );

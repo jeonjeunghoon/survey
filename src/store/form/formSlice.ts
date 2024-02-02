@@ -74,6 +74,15 @@ export const formSlice = createSlice({
       const newQuestionForm = { ...state.questionList[target], question: parseQuestion };
       state.questionList[target] = newQuestionForm;
     },
+    addOption: (state, action: PayloadAction<{ id: number }>) => {
+      const { id } = action.payload;
+
+      if (!state.questionList) return;
+
+      const target = findTargetIndex(state.questionList, id);
+      const optionList = state.questionList[target].optionList;
+      optionList?.push(`옵션 ${optionList.length + 1}`);
+    },
     editOption: () => {},
     pasteQuestion: () => {},
     deleteQuestion: () => {},
@@ -89,6 +98,7 @@ export const {
   addSingleChoiceQuestion,
   editType,
   editQuestion,
+  addOption,
   editOption,
   pasteQuestion,
   deleteQuestion,
