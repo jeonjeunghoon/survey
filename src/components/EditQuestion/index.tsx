@@ -50,7 +50,7 @@ export default function EditQuestion({ id, type, question, optionList, isFocus }
         <Answer type={type} />
       ) : (
         <>
-          <OptionList type={type} optionList={optionList} />
+          <OptionList id={id} type={type} optionList={optionList} isEdit />
           {isFocus && optionList && (
             <div>
               <Button onClick={addQuestionsOption}>
