@@ -11,11 +11,11 @@ export default function Router() {
       element: <App />,
       children: [
         {
-          path: 'form',
+          path: '',
           element: <Form />,
         },
         {
-          path: 'viewform',
+          path: 'view',
           element: <Viewform />,
         },
       ],
