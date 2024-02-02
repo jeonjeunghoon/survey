@@ -10,7 +10,7 @@ import DownArrowCircleIcon from '../assets/svg/down-arrow-circle.svg?react';
 import GripLinesIcon from '../assets/svg/grip-lines.svg?react';
 import LineColumnsIcon from '../assets/svg/line-columns.svg?react';
 
-const QUESTION_TYPE: Record<string, QuestionType> = {
+export const QUESTION_TYPE: Record<string, QuestionType> = {
   단답형: 'shortAnswer',
   장문형: 'longAnswer',
   객관식질문: 'singleChoice',

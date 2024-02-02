@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 
 import { QuestionType } from '../../types/question';
 
+import { QUESTION_TYPE } from '../../hooks/useQuestionTypeSet';
+
 import Answer from '../Answer';
 import OptionList from '../OptionList';
 
@@ -15,7 +17,7 @@ export default function ViewQuestion({ type, question, optionList }: Props) {
   return (
     <>
       <S.QuestionText>{question}</S.QuestionText>
-      {type === 'shortAnswer' || type === 'longAnswer' ? (
+      {type === QUESTION_TYPE.단답형 || type === QUESTION_TYPE.장문형 ? (
         <Answer type={type} />
       ) : (
         <OptionList type={type} optionList={optionList} />

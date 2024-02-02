@@ -2,12 +2,12 @@ import styled from '@emotion/styled';
 
 import { Question } from '../../types/question';
 
+import { QUESTION_TYPE, useQuestionTypeSet } from '../../hooks/useQuestionTypeSet';
+
 import TextArea from '../common/TextArea';
 import Answer from '../Answer';
 import OptionList from '../OptionList';
 import Dropdown from '../common/Dropdown';
-
-import { useQuestionTypeSet } from '../../hooks/useQuestionTypeSet';
 
 type Props = {
   isFocus: boolean;
@@ -21,8 +21,7 @@ export default function EditQuestion({ id, type, question, optionList, isFocus }
       <S.HeaderContainer>
         <S.QuestionWrapper>
           <TextArea
-            fontSize='1.6rem'
-            fontWeight={500}
+            fontSize='2rem'
             initialValue={question}
             backgroundColor='#F2F2F2'
             margin='16px'
@@ -34,7 +33,7 @@ export default function EditQuestion({ id, type, question, optionList, isFocus }
           <Dropdown dropdownMenuList={questionTypeList} defaultMenu={defaultQuestionType} />
         </S.DropdownWrapper>
       </S.HeaderContainer>
-      {type === 'shortAnswer' || type === 'longAnswer' ? (
+      {type === QUESTION_TYPE.단답형 || type === QUESTION_TYPE.장문형 ? (
         <Answer type={type} />
       ) : (
         <OptionList type={type} optionList={optionList} />
