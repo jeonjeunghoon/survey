@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import { useDispatch } from 'react-redux';
 
+import { useDispatch } from 'react-redux';
 import { addSingleChoiceQuestion } from '../../store/form/formSlice';
 
 import AddButtonIcon from '../../assets/svg/add-button.svg?react';
@@ -9,12 +9,10 @@ import Button from '../common/Button';
 export default function FormPanel() {
   const dispatch = useDispatch();
 
-  const addQuestion = () => dispatch(addSingleChoiceQuestion());
-
   return (
     <S.PanelWrapper>
       <S.Panel>
-        <Button onClick={addQuestion}>
+        <Button onClick={() => dispatch(addSingleChoiceQuestion())}>
           <AddButtonIcon />
         </Button>
       </S.Panel>

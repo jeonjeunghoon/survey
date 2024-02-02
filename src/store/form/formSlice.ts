@@ -29,13 +29,17 @@ export const formSlice = createSlice({
   name: 'form',
   initialState,
   reducers: {
-    editTitle: (state, action: PayloadAction<{ title: string }>) => {
+    editTitle: (state, action: PayloadAction<{ title?: string }>) => {
       const { title } = action.payload;
+
+      if (title === undefined) return;
 
       state.title = title;
     },
-    editDescription: (state, action: PayloadAction<{ description: string }>) => {
+    editDescription: (state, action: PayloadAction<{ description?: string }>) => {
       const { description } = action.payload;
+
+      if (description === undefined) return;
 
       state.description = description;
     },
@@ -63,10 +67,10 @@ export const formSlice = createSlice({
       const newQuestion = { ...state.questionList[targetQuestionForm], type: questionType };
       state.questionList[targetQuestionForm] = newQuestion;
     },
-    editQuestion: (state, action: PayloadAction<{ id: number; question: string }>) => {
+    editQuestion: (state, action: PayloadAction<{ id: number; question?: string }>) => {
       const { id, question } = action.payload;
 
-      if (!state.questionList) return;
+      if (!state.questionList || question === undefined) return;
 
       const targetQuestionForm = findTargetIndex(state.questionList, id);
 
