@@ -22,7 +22,14 @@ export default function OptionList({ id, type, optionList, isEdit = false }: Pro
     <ul>
       {optionList?.map((option, index) => (
         <S.OptionContainer>
-          <Option key={option} type={type} text={option} index={index} />
+          <Option
+            key={`${index}-${option}`}
+            id={id}
+            type={type}
+            text={option}
+            index={index}
+            isEdit={isEdit}
+          />
           {isEdit && optionList.length > 1 && (
             <S.DeleteButton onClick={() => dispatch(deleteOption({ id, index }))}>
               <XSymbolIcon width='16px' height='16px' />

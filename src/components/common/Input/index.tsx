@@ -8,34 +8,42 @@ import BottomBorder from '../BottomBorder';
 
 type Props = {
   type?: string;
+  initialValue?: string;
   fontSize?: string;
   fontWeight?: number;
-  initialValue?: string;
-  backgroundColor?: string;
+  fontColor?: string;
   placeholder?: string;
+  backgroundColor?: string;
+  handleInputChange?: (value: string) => void;
 } & ComponentPropsWithoutRef<'input'>;
 
 export default function Input({
   type = 'text',
+  initialValue = '',
   fontSize = '1.6rem',
   fontWeight = 400,
-  initialValue = '',
+  fontColor = 'black',
   backgroundColor = 'inherit',
   placeholder,
+  handleInputChange,
   ...rest
 }: Props) {
-  const { value, isFocus, setValue, handleFocus, handleBlur } = useInput(initialValue);
+  const { value, isFocus, setValue, handleFocus, handleBlur } = useInput(
+    initialValue,
+    handleInputChange,
+  );
 
   return (
     <S.Container>
       <S.Input
         type={type}
         value={value}
-        onChange={(event) => setValue(event.currentTarget.value)}
         fontSize={fontSize}
         fontWeight={fontWeight}
+        fontColor={fontColor}
         placeholder={placeholder}
         backgroundColor={backgroundColor}
+        onChange={(event) => setValue(event.currentTarget.value)}
         onFocus={handleFocus}
         onBlur={handleBlur}
         {...rest}
@@ -57,6 +65,7 @@ const S = {
   Input: styled.input<{
     fontSize: string;
     fontWeight: number;
+    fontColor: string;
     backgroundColor: string;
   }>`
     width: 100%;
@@ -65,6 +74,7 @@ const S = {
     outline: none;
     font-size: ${({ fontSize }) => fontSize};
     font-weight: ${({ fontWeight }) => fontWeight};
+    color: ${({ fontColor }) => fontColor};
     background-color: ${({ backgroundColor }) => backgroundColor};
     letter-spacing: 0;
   `,

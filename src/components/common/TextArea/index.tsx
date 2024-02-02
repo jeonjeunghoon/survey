@@ -31,7 +31,7 @@ export default function TextArea({
   handleTextareaChange,
   ...rest
 }: Props) {
-  const { value, setValue, handleFocus, handleBlur } = useInput(initialValue);
+  const { value, setValue } = useInput(initialValue);
   const ref = useRef<HTMLTextAreaElement>(null);
   useResizeTextAreaHeight(ref, value);
 
@@ -53,8 +53,6 @@ export default function TextArea({
         value={value}
         ref={ref}
         onChange={handleChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
         {...rest}
       />
       {isFocus && <BottomBorder startAnimation={isFocus} />}

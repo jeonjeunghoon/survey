@@ -58,29 +58,32 @@ export const formSlice = createSlice({
 
       if (!state.questionList) return;
 
-      const target = findTargetIndex(state.questionList, id);
+      const targetQuestionForm = findTargetIndex(state.questionList, id);
 
-      const newQuestion = { ...state.questionList[target], type: questionType };
-      state.questionList[target] = newQuestion;
+      const newQuestion = { ...state.questionList[targetQuestionForm], type: questionType };
+      state.questionList[targetQuestionForm] = newQuestion;
     },
     editQuestion: (state, action: PayloadAction<{ id: number; question: string }>) => {
       const { id, question } = action.payload;
 
       if (!state.questionList) return;
 
-      const target = findTargetIndex(state.questionList, id);
+      const targetQuestionForm = findTargetIndex(state.questionList, id);
 
       const parseQuestion = question.trim();
-      const newQuestionForm = { ...state.questionList[target], question: parseQuestion };
-      state.questionList[target] = newQuestionForm;
+      const newQuestionForm = {
+        ...state.questionList[targetQuestionForm],
+        question: parseQuestion,
+      };
+      state.questionList[targetQuestionForm] = newQuestionForm;
     },
     addOption: (state, action: PayloadAction<{ id: number }>) => {
       const { id } = action.payload;
 
       if (!state.questionList) return;
 
-      const target = findTargetIndex(state.questionList, id);
-      const optionList = state.questionList[target].optionList;
+      const targetQuestionForm = findTargetIndex(state.questionList, id);
+      const optionList = state.questionList[targetQuestionForm].optionList;
       optionList?.push(`옵션 ${optionList.length + 1}`);
     },
     deleteOption: (state, action: PayloadAction<{ id: number; index: number }>) => {
@@ -88,11 +91,19 @@ export const formSlice = createSlice({
 
       if (!state.questionList) return;
 
-      const target = findTargetIndex(state.questionList, id);
-      const optionList = state.questionList[target].optionList;
+      const targetQuestionForm = findTargetIndex(state.questionList, id);
+      const optionList = state.questionList[targetQuestionForm].optionList;
       optionList?.splice(index, 1);
     },
-    editOption: () => {},
+    editOption: (state, action: PayloadAction<{ id: number; index: number; option: string }>) => {
+      const { id, index, option } = action.payload;
+
+      if (!state.questionList) return;
+
+      const targetQuestionForm = findTargetIndex(state.questionList, id);
+      const optionList = state.questionList[targetQuestionForm].optionList;
+      if (optionList) optionList[index] = option;
+    },
     pasteQuestion: () => {},
     deleteQuestion: () => {},
     setRequired: () => {},

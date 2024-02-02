@@ -1,29 +1,52 @@
 import styled from '@emotion/styled';
 
+import { useDispatch } from 'react-redux';
+import { editOption } from '../../store/form/formSlice';
+
 import { QuestionType } from '../../types/question';
 import { QUESTION_TYPE } from '../../hooks/useQuestionTypeSet';
 
 import CircleIcon from '../../assets/svg/circle.svg?react';
 import SquareIcon from '../../assets/svg/square.svg?react';
+import Input from '../common/Input';
 
 type Props = {
+  id: number;
   type: QuestionType;
   text: string;
   index: number;
+  isEdit?: boolean;
   fontColor?: string;
 };
 
-export default function Option({ type, text, index, fontColor = 'black' }: Props) {
+export default function Option({
+  id,
+  type,
+  text,
+  index,
+  isEdit = false,
+  fontColor = 'black',
+}: Props) {
   const table = {
     [QUESTION_TYPE.객관식질문]: <CircleIcon stroke='#BDBDBD' fill='white' />,
     [QUESTION_TYPE.체크박스]: <SquareIcon stroke='#BDBDBD' fill='white' />,
     [QUESTION_TYPE.드롭다운]: <S.DropdownIndex>{index + 1}</S.DropdownIndex>,
   };
+  const dispatch = useDispatch();
 
   return (
     <S.Option>
       <S.Head>{table[type]}</S.Head>
-      <S.Text fontColor={fontColor}>{text}</S.Text>
+      {isEdit ? (
+        <Input
+          initialValue={text}
+          fontColor={fontColor}
+          handleInputChange={(value: string) => dispatch(editOption({ id, index, option: value }))}
+          autoFocus
+        />
+      ) : (
+        <S.Text fontColor={fontColor}>{text}</S.Text>
+      )}
     </S.Option>
   );
 }

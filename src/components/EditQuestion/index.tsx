@@ -55,6 +55,7 @@ export default function EditQuestion({ id, type, question, optionList, isFocus }
             <div>
               <Button onClick={addQuestionsOption}>
                 <Option
+                  id={id}
                   type={type}
                   text={'옵션 추가'}
                   index={optionList.length}

@@ -1,12 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export const useInput = (initialValue: string) => {
+import useDebounce from './useDebounce';
+
+export const useInput = (initialValue: string, handleInputChange?: (value: string) => void) => {
   const [value, setValue] = useState(initialValue);
+  const debouncedValue = useDebounce<string>(value, 500);
   const [isFocus, setIsFocus] = useState(false);
 
   const handleFocus = () => setIsFocus(true);
 
   const handleBlur = () => setIsFocus(false);
 
-  return { value, setValue, isFocus, handleFocus, handleBlur };
+  useEffect(() => {
+    if (handleInputChange) handleInputChange(debouncedValue);
+  }, [handleInputChange, debouncedValue]);
+
+  return { value, isFocus, setValue, handleFocus, handleBlur };
 };
