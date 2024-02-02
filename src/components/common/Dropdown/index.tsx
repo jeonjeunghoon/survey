@@ -5,6 +5,7 @@ import { useDropdown } from '../../../hooks/useDropdown';
 
 import MenuList from './MenuList';
 import MenuItem from './MenuItem';
+import DownArrowIcon from '../../../assets/svg/down-arrow.svg?react';
 
 type Props = {
   dropdownMenuList: DropdownMenu[];
@@ -17,15 +18,18 @@ export default function Dropdown({ dropdownMenuList, defaultMenu = dropdownMenuL
 
   return (
     <S.Container ref={ref}>
-      {isOpen && isFocus && (
-        <MenuList
-          dropdownMenuList={dropdownMenuList}
-          closeMenu={closeMenu}
-          changeSelectedMenu={changeSelectedMenu}
-        />
-      )}
-      <MenuItem icon={selectedMenu.icon} text={selectedMenu.text} handleMenuClick={showMenu} />
-      <S.ArrowWrapper></S.ArrowWrapper>
+      <MenuList
+        dropdownMenuList={dropdownMenuList}
+        closeMenu={closeMenu}
+        changeSelectedMenu={changeSelectedMenu}
+        isShowing={isOpen && isFocus}
+      />
+      <S.DefaultContainer onClick={showMenu}>
+        <MenuItem icon={selectedMenu.icon} text={selectedMenu.text} />
+        <S.ArrowWrapper>
+          <DownArrowIcon />
+        </S.ArrowWrapper>
+      </S.DefaultContainer>
     </S.Container>
   );
 }
@@ -34,18 +38,23 @@ const S = {
   Container: styled.div`
     position: relative;
     width: 100%;
+    padding: 0 8px;
 
     border-radius: 4px;
     border: 1px solid #dadce0;
     background-color: white;
-
-    button {
-      display: flex;
-      justify-content: start;
-      width: 100%;
-      height: 100%;
-    }
+    cursor: pointer;
   `,
 
-  ArrowWrapper: styled.div``,
+  DefaultContainer: styled.div`
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  `,
+
+  ArrowWrapper: styled.div`
+    width: 20px;
+    height: 20px;
+  `,
 };

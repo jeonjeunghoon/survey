@@ -5,7 +5,7 @@ import { DropdownMenu } from '../../../../types/dropdown';
 import Button from '../../Button';
 
 type Props = {
-  handleMenuClick: () => void;
+  handleMenuClick?: () => void;
 } & Omit<DropdownMenu, 'type' | 'handleClick'>;
 
 export default function MenuItem({ icon, text, handleMenuClick }: Props) {
@@ -27,6 +27,7 @@ const S = {
     button {
       display: flex;
       justify-content: start;
+      align-items: center;
       gap: 8px;
       width: 100%;
       height: 100%;

@@ -6,11 +6,19 @@ import MenuItem from '../MenuItem';
 
 type Props = {
   dropdownMenuList: DropdownMenu[];
+  isShowing: boolean;
   closeMenu: () => void;
   changeSelectedMenu: (menu: DropdownMenu) => void;
 };
 
-export default function MenuList({ dropdownMenuList, closeMenu, changeSelectedMenu }: Props) {
+export default function MenuList({
+  dropdownMenuList,
+  isShowing,
+  closeMenu,
+  changeSelectedMenu,
+}: Props) {
+  if (!isShowing) return null;
+
   return (
     <S.List>
       {dropdownMenuList.map((menu) => {
@@ -44,6 +52,9 @@ const S = {
     border-radius: 4px;
     border: 1px solid #dadce0;
     background-color: white;
-    z-index: 1;
+
+    li {
+      padding: 0 8px;
+    }
   `,
 };

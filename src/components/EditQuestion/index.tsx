@@ -14,7 +14,7 @@ type Props = {
 } & Omit<Question, 'isRequired'>;
 
 export default function EditQuestion({ id, type, question, optionList, isFocus }: Props) {
-  const questionType = useQuestionTypeSet(id);
+  const { questionTypeList, defaultQuestionType } = useQuestionTypeSet(id, type);
 
   return (
     <>
@@ -31,7 +31,7 @@ export default function EditQuestion({ id, type, question, optionList, isFocus }
           />
         </S.QuestionWrapper>
         <S.DropdownWrapper>
-          <Dropdown dropdownMenuList={questionType.list} defaultMenu={questionType.default} />
+          <Dropdown dropdownMenuList={questionTypeList} defaultMenu={defaultQuestionType} />
         </S.DropdownWrapper>
       </S.HeaderContainer>
       {type === 'shortAnswer' || type === 'longAnswer' ? (
