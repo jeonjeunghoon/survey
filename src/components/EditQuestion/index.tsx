@@ -1,16 +1,17 @@
 import styled from '@emotion/styled';
 
 import { useDispatch } from 'react-redux';
-import { editQuestion } from '../../store/form/formSlice';
+import { editQuestion, pasteQuestion } from '../../store/form/formSlice';
 
 import { Question } from '../../types/question';
 
 import { QUESTION_TYPE, useQuestionTypeSet } from '../../hooks/useQuestionTypeSet';
 
 import TextArea from '../common/TextArea';
-import Answer from '../Answer';
-import OptionList from '../OptionList';
 import Dropdown from '../common/Dropdown';
+import Button from '../common/Button';
+import OptionList from '../OptionList';
+import Answer from '../Answer';
 
 type Props = {
   isFocus: boolean;
@@ -28,7 +29,7 @@ export default function EditQuestion({
   const dispatch = useDispatch();
 
   return (
-    <>
+    <S.Container>
       <S.HeaderContainer>
         <S.QuestionWrapper>
           <TextArea
@@ -58,11 +59,20 @@ export default function EditQuestion({
           isEdit
         />
       )}
-    </>
+      <S.BottomBorder />
+      <S.FooterContainer>
+        <Button onClick={() => dispatch(pasteQuestion({ id }))}>복사</Button>
+        <Button>삭제</Button>
+      </S.FooterContainer>
+    </S.Container>
   );
 }
 
 const S = {
+  Container: styled.div`
+    position: relative;
+  `,
+
   HeaderContainer: styled.div`
     display: flex;
     justify-content: space-between;
@@ -78,5 +88,21 @@ const S = {
 
   DropdownWrapper: styled.div`
     width: 208px;
+  `,
+
+  BottomBorder: styled.div`
+    width: 100%;
+    height: 1px;
+    margin-top: 24px;
+
+    background-color: #e0e0e0;
+  `,
+
+  FooterContainer: styled.div`
+    display: flex;
+    gap: 20px;
+    justify-content: end;
+    align-items: center;
+    margin-top: 20px;
   `,
 };

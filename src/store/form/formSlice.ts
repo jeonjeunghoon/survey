@@ -64,18 +64,18 @@ export const formSlice = createSlice({
 
       if (!state.questionList) return;
 
-      const targetQuestionForm = findTargetIndex(state.questionList, id);
+      const targetQuestionFormIndex = findTargetIndex(state.questionList, id);
 
       const hasOtherOption =
         questionType === QUESTION_TYPE.객관식질문 || questionType === QUESTION_TYPE.체크박스
-          ? state.questionList[targetQuestionForm].hasOtherOption
+          ? state.questionList[targetQuestionFormIndex].hasOtherOption
           : false;
       const newQuestion = {
-        ...state.questionList[targetQuestionForm],
+        ...state.questionList[targetQuestionFormIndex],
         type: questionType,
         hasOtherOption,
       };
-      state.questionList[targetQuestionForm] = newQuestion;
+      state.questionList[targetQuestionFormIndex] = newQuestion;
     },
 
     editQuestion: (state, action: PayloadAction<{ id: number; question?: string }>) => {
@@ -83,14 +83,14 @@ export const formSlice = createSlice({
 
       if (!state.questionList || question === undefined) return;
 
-      const targetQuestionForm = findTargetIndex(state.questionList, id);
+      const targetQuestionFormIndex = findTargetIndex(state.questionList, id);
 
       const parseQuestion = question.trim();
       const newQuestionForm = {
-        ...state.questionList[targetQuestionForm],
+        ...state.questionList[targetQuestionFormIndex],
         question: parseQuestion,
       };
-      state.questionList[targetQuestionForm] = newQuestionForm;
+      state.questionList[targetQuestionFormIndex] = newQuestionForm;
     },
 
     addOption: (state, action: PayloadAction<{ id: number }>) => {
@@ -98,8 +98,8 @@ export const formSlice = createSlice({
 
       if (!state.questionList) return;
 
-      const targetQuestionForm = findTargetIndex(state.questionList, id);
-      const optionList = state.questionList[targetQuestionForm].optionList;
+      const targetQuestionFormIndex = findTargetIndex(state.questionList, id);
+      const optionList = state.questionList[targetQuestionFormIndex].optionList;
       optionList?.push(`옵션 ${optionList.length + 1}`);
     },
 
@@ -108,8 +108,8 @@ export const formSlice = createSlice({
 
       if (!state.questionList) return;
 
-      const targetQuestionForm = findTargetIndex(state.questionList, id);
-      const optionList = state.questionList[targetQuestionForm].optionList;
+      const targetQuestionFormIndex = findTargetIndex(state.questionList, id);
+      const optionList = state.questionList[targetQuestionFormIndex].optionList;
       optionList?.splice(index, 1);
     },
 
@@ -118,8 +118,8 @@ export const formSlice = createSlice({
 
       if (!state.questionList) return;
 
-      const targetQuestionForm = findTargetIndex(state.questionList, id);
-      const optionList = state.questionList[targetQuestionForm].optionList;
+      const targetQuestionFormIndex = findTargetIndex(state.questionList, id);
+      const optionList = state.questionList[targetQuestionFormIndex].optionList;
       if (optionList) optionList[index] = option;
     },
 
@@ -128,8 +128,8 @@ export const formSlice = createSlice({
 
       if (!state.questionList) return;
 
-      const targetQuestionForm = findTargetIndex(state.questionList, id);
-      state.questionList[targetQuestionForm].hasOtherOption = true;
+      const targetQuestionFormIndex = findTargetIndex(state.questionList, id);
+      state.questionList[targetQuestionFormIndex].hasOtherOption = true;
     },
 
     deleteOtherOption: (state, action: PayloadAction<{ id: number }>) => {
@@ -137,14 +137,31 @@ export const formSlice = createSlice({
 
       if (!state.questionList) return;
 
-      const targetQuestionForm = findTargetIndex(state.questionList, id);
-      state.questionList[targetQuestionForm].hasOtherOption = false;
+      const targetQuestionFormIndex = findTargetIndex(state.questionList, id);
+      state.questionList[targetQuestionFormIndex].hasOtherOption = false;
     },
 
-    pasteQuestion: () => {},
+    pasteQuestion: (state, action: PayloadAction<{ id: number }>) => {
+      const { id } = action.payload;
+
+      if (!state.questionList) return;
+
+      const targetQuestionFormIndex = findTargetIndex(state.questionList, id);
+
+      const NEW_QUESTION: Question = {
+        ...state.questionList[targetQuestionFormIndex],
+        id: Math.max(...state.questionList.map((question) => question.id)) + 1,
+      };
+
+      state.questionList.splice(targetQuestionFormIndex, 0, NEW_QUESTION);
+    },
+
     deleteQuestion: () => {},
+
     setRequired: () => {},
+
     changeQuestionOrder: () => {},
+
     changeOptionOrder: () => {},
   },
 });
