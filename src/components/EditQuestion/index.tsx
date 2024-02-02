@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 import { useDispatch } from 'react-redux';
-import { editQuestion, pasteQuestion } from '../../store/form/formSlice';
+import { deleteQuestion, editQuestion, pasteQuestion } from '../../store/form/formSlice';
 
 import { Question } from '../../types/question';
 
@@ -62,7 +62,7 @@ export default function EditQuestion({
       <S.BottomBorder />
       <S.FooterContainer>
         <Button onClick={() => dispatch(pasteQuestion({ id }))}>복사</Button>
-        <Button>삭제</Button>
+        <Button onClick={() => dispatch(deleteQuestion({ id }))}>삭제</Button>
       </S.FooterContainer>
     </S.Container>
   );

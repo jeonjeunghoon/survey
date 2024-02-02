@@ -156,7 +156,15 @@ export const formSlice = createSlice({
       state.questionList.splice(targetQuestionFormIndex, 0, NEW_QUESTION);
     },
 
-    deleteQuestion: () => {},
+    deleteQuestion: (state, action: PayloadAction<{ id: number }>) => {
+      const { id } = action.payload;
+
+      if (!state.questionList) return;
+
+      const targetQuestionFormIndex = findTargetIndex(state.questionList, id);
+
+      state.questionList.splice(targetQuestionFormIndex, 1);
+    },
 
     setRequired: () => {},
 
