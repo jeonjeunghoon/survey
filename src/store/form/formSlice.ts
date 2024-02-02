@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Question, QuestionType } from '../../types/question';
+import { QUESTION_TYPE } from '../../hooks/useQuestionTypeSet';
 
 type FormState = {
   title: string;
@@ -13,6 +14,7 @@ const INITIAL_QUESTION: Question = {
   type: 'singleChoice',
   question: '제목없는 질문',
   optionList: ['옵션 1'],
+  hasOtherOption: false,
   isRequired: false,
 };
 
@@ -36,6 +38,7 @@ export const formSlice = createSlice({
 
       state.title = title;
     },
+
     editDescription: (state, action: PayloadAction<{ description?: string }>) => {
       const { description } = action.payload;
 
@@ -43,20 +46,19 @@ export const formSlice = createSlice({
 
       state.description = description;
     },
+
     addSingleChoiceQuestion: (state) => {
       const NEW_QUESTION: Question = {
+        ...INITIAL_QUESTION,
         id: state.questionList
           ? Math.max(...state.questionList.map((question) => question.id)) + 1
           : 0,
-        type: 'singleChoice',
-        question: '',
-        optionList: ['옵션 1'],
-        isRequired: false,
       };
 
       if (!state.questionList) state.questionList = [NEW_QUESTION];
       else state.questionList.push(NEW_QUESTION);
     },
+
     editType: (state, action: PayloadAction<{ id: number; questionType: QuestionType }>) => {
       const { id, questionType } = action.payload;
 
@@ -64,9 +66,18 @@ export const formSlice = createSlice({
 
       const targetQuestionForm = findTargetIndex(state.questionList, id);
 
-      const newQuestion = { ...state.questionList[targetQuestionForm], type: questionType };
+      const hasOtherOption =
+        questionType === QUESTION_TYPE.객관식질문 || questionType === QUESTION_TYPE.체크박스
+          ? state.questionList[targetQuestionForm].hasOtherOption
+          : false;
+      const newQuestion = {
+        ...state.questionList[targetQuestionForm],
+        type: questionType,
+        hasOtherOption,
+      };
       state.questionList[targetQuestionForm] = newQuestion;
     },
+
     editQuestion: (state, action: PayloadAction<{ id: number; question?: string }>) => {
       const { id, question } = action.payload;
 
@@ -81,6 +92,7 @@ export const formSlice = createSlice({
       };
       state.questionList[targetQuestionForm] = newQuestionForm;
     },
+
     addOption: (state, action: PayloadAction<{ id: number }>) => {
       const { id } = action.payload;
 
@@ -90,6 +102,7 @@ export const formSlice = createSlice({
       const optionList = state.questionList[targetQuestionForm].optionList;
       optionList?.push(`옵션 ${optionList.length + 1}`);
     },
+
     deleteOption: (state, action: PayloadAction<{ id: number; index: number }>) => {
       const { id, index } = action.payload;
 
@@ -99,6 +112,7 @@ export const formSlice = createSlice({
       const optionList = state.questionList[targetQuestionForm].optionList;
       optionList?.splice(index, 1);
     },
+
     editOption: (state, action: PayloadAction<{ id: number; index: number; option: string }>) => {
       const { id, index, option } = action.payload;
 
@@ -108,6 +122,25 @@ export const formSlice = createSlice({
       const optionList = state.questionList[targetQuestionForm].optionList;
       if (optionList) optionList[index] = option;
     },
+
+    addOtherOption: (state, action: PayloadAction<{ id: number }>) => {
+      const { id } = action.payload;
+
+      if (!state.questionList) return;
+
+      const targetQuestionForm = findTargetIndex(state.questionList, id);
+      state.questionList[targetQuestionForm].hasOtherOption = true;
+    },
+
+    deleteOtherOption: (state, action: PayloadAction<{ id: number }>) => {
+      const { id } = action.payload;
+
+      if (!state.questionList) return;
+
+      const targetQuestionForm = findTargetIndex(state.questionList, id);
+      state.questionList[targetQuestionForm].hasOtherOption = false;
+    },
+
     pasteQuestion: () => {},
     deleteQuestion: () => {},
     setRequired: () => {},
@@ -125,6 +158,8 @@ export const {
   addOption,
   deleteOption,
   editOption,
+  addOtherOption,
+  deleteOtherOption,
   pasteQuestion,
   deleteQuestion,
   setRequired,

@@ -12,7 +12,7 @@ export default function QuestionCardList() {
 
   return (
     <S.List>
-      {questionList.map(({ id, type, question, optionList, isRequired }) => {
+      {questionList.map(({ id, type, question, optionList, hasOtherOption, isRequired }) => {
         return (
           <S.Item key={id}>
             <QuestionCard
@@ -20,6 +20,7 @@ export default function QuestionCardList() {
               type={type}
               question={question}
               optionList={optionList}
+              hasOtherOption={hasOtherOption}
               isRequired={isRequired}
             />
           </S.Item>

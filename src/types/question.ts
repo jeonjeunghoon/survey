@@ -5,5 +5,6 @@ export type Question = {
   type: QuestionType;
   question: string;
   optionList: string[] | null;
+  hasOtherOption: boolean;
   isRequired: boolean;
 };

@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
+
 import { useDispatch } from 'react-redux';
+import { editQuestion } from '../../store/form/formSlice';
 
 import { Question } from '../../types/question';
 
@@ -9,24 +11,21 @@ import TextArea from '../common/TextArea';
 import Answer from '../Answer';
 import OptionList from '../OptionList';
 import Dropdown from '../common/Dropdown';
-import { addOption, editQuestion } from '../../store/form/formSlice';
-import Option from '../Option';
-import Button from '../common/Button';
 
 type Props = {
   isFocus: boolean;
 } & Omit<Question, 'isRequired'>;
 
-export default function EditQuestion({ id, type, question, optionList, isFocus }: Props) {
+export default function EditQuestion({
+  id,
+  type,
+  question,
+  optionList,
+  hasOtherOption,
+  isFocus,
+}: Props) {
   const { questionTypeList, defaultQuestionType } = useQuestionTypeSet(id, type);
   const dispatch = useDispatch();
-  const changeQuestion = (value?: string) => {
-    if (value === undefined) return;
-
-    dispatch(editQuestion({ id, question: value }));
-  };
-
-  const addQuestionsOption = () => dispatch(addOption({ id }));
 
   return (
     <>
@@ -39,7 +38,9 @@ export default function EditQuestion({ id, type, question, optionList, isFocus }
             margin='16px'
             placeholder='질문'
             isFocus={isFocus}
-            handleTextareaChange={changeQuestion}
+            handleTextareaChange={(value?: string) =>
+              dispatch(editQuestion({ id, question: value }))
+            }
           />
         </S.QuestionWrapper>
         <S.DropdownWrapper>
@@ -49,22 +50,13 @@ export default function EditQuestion({ id, type, question, optionList, isFocus }
       {type === QUESTION_TYPE.단답형 || type === QUESTION_TYPE.장문형 ? (
         <Answer type={type} />
       ) : (
-        <>
-          <OptionList id={id} type={type} optionList={optionList} isEdit />
-          {isFocus && optionList && (
-            <div>
-              <Button onClick={addQuestionsOption}>
-                <Option
-                  id={id}
-                  type={type}
-                  text={'옵션 추가'}
-                  index={optionList.length}
-                  fontColor={'#70757A'}
-                />
-              </Button>
-            </div>
-          )}
-        </>
+        <OptionList
+          id={id}
+          type={type}
+          optionList={optionList}
+          hasOtherOption={hasOtherOption}
+          isEdit
+        />
       )}
     </>
   );
