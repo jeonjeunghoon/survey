@@ -1,7 +1,12 @@
 import styled from '@emotion/styled';
 
 import { useDispatch } from 'react-redux';
-import { deleteQuestion, editQuestion, pasteQuestion } from '../../store/form/formSlice';
+import {
+  deleteQuestion,
+  editQuestion,
+  pasteQuestion,
+  toggleRequired,
+} from '../../store/form/formSlice';
 
 import { Question } from '../../types/question';
 
@@ -63,6 +68,7 @@ export default function EditQuestion({
       <S.FooterContainer>
         <Button onClick={() => dispatch(pasteQuestion({ id }))}>복사</Button>
         <Button onClick={() => dispatch(deleteQuestion({ id }))}>삭제</Button>
+        <Button onClick={() => dispatch(toggleRequired({ id }))}>필수</Button>
       </S.FooterContainer>
     </S.Container>
   );

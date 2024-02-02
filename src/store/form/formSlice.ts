@@ -166,7 +166,16 @@ export const formSlice = createSlice({
       state.questionList.splice(targetQuestionFormIndex, 1);
     },
 
-    setRequired: () => {},
+    toggleRequired: (state, action: PayloadAction<{ id: number }>) => {
+      const { id } = action.payload;
+
+      if (!state.questionList) return;
+
+      const targetQuestionFormIndex = findTargetIndex(state.questionList, id);
+      const isRequired = state.questionList[targetQuestionFormIndex].isRequired;
+
+      state.questionList[targetQuestionFormIndex].isRequired = !isRequired;
+    },
 
     changeQuestionOrder: () => {},
 
@@ -187,7 +196,7 @@ export const {
   deleteOtherOption,
   pasteQuestion,
   deleteQuestion,
-  setRequired,
+  toggleRequired,
   changeQuestionOrder,
   changeOptionOrder,
 } = formSlice.actions;
