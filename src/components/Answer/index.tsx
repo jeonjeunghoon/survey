@@ -23,7 +23,7 @@ export default function Answer({ type }: Props) {
 const S = {
   AnswerWrapper: styled.div<{ width: string }>`
     width: ${({ width }) => width};
-    margin-top: 32px;
+    margin-top: 20px;
 
     border-bottom: 1px solid #dadce0;
   `,
