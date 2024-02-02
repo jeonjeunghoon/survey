@@ -9,12 +9,13 @@ import {
 } from '../../store/form/formSlice';
 
 import { Question } from '../../types/question';
-
 import { QUESTION_TYPE, useQuestionTypeSet } from '../../hooks/useQuestionTypeSet';
 
 import TextArea from '../common/TextArea';
 import Dropdown from '../common/Dropdown';
 import Button from '../common/Button';
+import PasteIcon from '../../assets/svg/copy-document.svg?react';
+import TrashcanIcon from '../../assets/svg/trash.svg?react';
 import OptionList from '../OptionList';
 import Answer from '../Answer';
 
@@ -66,8 +67,12 @@ export default function EditQuestion({
       )}
       <S.BottomBorder />
       <S.FooterContainer>
-        <Button onClick={() => dispatch(pasteQuestion({ id }))}>복사</Button>
-        <Button onClick={() => dispatch(deleteQuestion({ id }))}>삭제</Button>
+        <Button onClick={() => dispatch(pasteQuestion({ id }))}>
+          <PasteIcon width='24px' height='24px' />
+        </Button>
+        <Button onClick={() => dispatch(deleteQuestion({ id }))}>
+          <TrashcanIcon width='24px' height='24px' />
+        </Button>
         <Button onClick={() => dispatch(toggleRequired({ id }))}>필수</Button>
       </S.FooterContainer>
     </S.Container>
