@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, useRef } from 'react';
+import { ChangeEvent, ComponentPropsWithoutRef, useRef } from 'react';
 
 import styled from '@emotion/styled';
 
@@ -16,6 +16,7 @@ type Props = {
   margin?: string;
   isFocus?: boolean;
   placeholder?: string;
+  handleTextareaChange?: (value?: string) => void;
 } & ComponentPropsWithoutRef<'textarea'>;
 
 export default function TextArea({
@@ -27,11 +28,19 @@ export default function TextArea({
   margin = '',
   isFocus = false,
   placeholder,
+  handleTextareaChange,
   ...rest
 }: Props) {
   const { value, setValue, handleFocus, handleBlur } = useInput(initialValue);
   const ref = useRef<HTMLTextAreaElement>(null);
   useResizeTextAreaHeight(ref, value);
+
+  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    const text = event.currentTarget.value;
+
+    if (handleTextareaChange) handleTextareaChange(text);
+    setValue(text);
+  };
 
   return (
     <S.Container backgroundColor={backgroundColor}>
@@ -43,7 +52,7 @@ export default function TextArea({
         margin={margin}
         value={value}
         ref={ref}
-        onChange={(event) => setValue(event.currentTarget.value)}
+        onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
         {...rest}

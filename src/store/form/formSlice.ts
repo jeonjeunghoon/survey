@@ -22,10 +22,23 @@ const initialState: FormState = {
   questionList: [INITIAL_QUESTION],
 };
 
+const findTargetIndex = (questionList: Question[], id: number) =>
+  questionList?.findIndex((question) => question.id === id);
+
 export const formSlice = createSlice({
   name: 'form',
   initialState,
   reducers: {
+    editTitle: (state, action: PayloadAction<{ title: string }>) => {
+      const { title } = action.payload;
+
+      state.title = title;
+    },
+    editDescription: (state, action: PayloadAction<{ description: string }>) => {
+      const { description } = action.payload;
+
+      state.description = description;
+    },
     addSingleChoiceQuestion: (state) => {
       const NEW_QUESTION: Question = {
         id: state.questionList
@@ -45,12 +58,22 @@ export const formSlice = createSlice({
 
       if (!state.questionList) return;
 
-      const target = state.questionList?.findIndex((question) => question.id === id);
+      const target = findTargetIndex(state.questionList, id);
 
       const newQuestion = { ...state.questionList[target], type: questionType };
       state.questionList[target] = newQuestion;
     },
-    editQuestion: () => {},
+    editQuestion: (state, action: PayloadAction<{ id: number; question: string }>) => {
+      const { id, question } = action.payload;
+
+      if (!state.questionList) return;
+
+      const target = findTargetIndex(state.questionList, id);
+
+      const parseQuestion = question.trim();
+      const newQuestionForm = { ...state.questionList[target], question: parseQuestion };
+      state.questionList[target] = newQuestionForm;
+    },
     editOption: () => {},
     pasteQuestion: () => {},
     deleteQuestion: () => {},
@@ -61,6 +84,8 @@ export const formSlice = createSlice({
 });
 
 export const {
+  editTitle,
+  editDescription,
   addSingleChoiceQuestion,
   editType,
   editQuestion,

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useDispatch } from 'react-redux';
 
 import { Question } from '../../types/question';
 
@@ -8,6 +9,7 @@ import TextArea from '../common/TextArea';
 import Answer from '../Answer';
 import OptionList from '../OptionList';
 import Dropdown from '../common/Dropdown';
+import { editQuestion } from '../../store/form/formSlice';
 
 type Props = {
   isFocus: boolean;
@@ -15,6 +17,12 @@ type Props = {
 
 export default function EditQuestion({ id, type, question, optionList, isFocus }: Props) {
   const { questionTypeList, defaultQuestionType } = useQuestionTypeSet(id, type);
+  const dispatch = useDispatch();
+  const changeQuestion = (value?: string) => {
+    if (value === undefined) return;
+
+    dispatch(editQuestion({ id, question: value }));
+  };
 
   return (
     <>
@@ -27,6 +35,7 @@ export default function EditQuestion({ id, type, question, optionList, isFocus }
             margin='16px'
             placeholder='질문'
             isFocus={isFocus}
+            handleTextareaChange={changeQuestion}
           />
         </S.QuestionWrapper>
         <S.DropdownWrapper>

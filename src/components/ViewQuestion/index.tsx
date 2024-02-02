@@ -16,7 +16,7 @@ type Props = {
 export default function ViewQuestion({ type, question, optionList }: Props) {
   return (
     <>
-      <S.QuestionText>{question}</S.QuestionText>
+      <S.QuestionText>{question ? question : '질문'}</S.QuestionText>
       {type === QUESTION_TYPE.단답형 || type === QUESTION_TYPE.장문형 ? (
         <Answer type={type} />
       ) : (
