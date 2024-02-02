@@ -28,7 +28,7 @@ export default function ViewQuestion({ type, question, optionList }: Props) {
 
 const S = {
   QuestionText: styled.p`
-    font-size: 1.6rem;
+    font-size: 2rem;
     font-weight: 500;
   `,
 };
