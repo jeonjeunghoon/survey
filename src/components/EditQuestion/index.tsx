@@ -11,7 +11,7 @@ import {
 import { Question } from '../../types/question';
 import { QUESTION_TYPE, useQuestionTypeSet } from '../../hooks/useQuestionTypeSet';
 
-import TextArea from '../common/TextArea';
+import Textarea from '../common/Textarea';
 import Dropdown from '../common/Dropdown';
 import Button from '../common/Button';
 import PasteIcon from '../../assets/svg/copy-document.svg?react';
@@ -38,7 +38,7 @@ export default function EditQuestion({
     <S.Container>
       <S.HeaderContainer>
         <S.QuestionWrapper>
-          <TextArea
+          <Textarea
             fontSize='2rem'
             initialValue={question}
             backgroundColor='#F2F2F2'

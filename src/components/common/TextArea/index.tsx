@@ -2,10 +2,10 @@ import { ChangeEvent, ComponentPropsWithoutRef, useRef } from 'react';
 
 import styled from '@emotion/styled';
 
-import BottomBorder from '../BottomBorder';
-
-import { useResizeTextAreaHeight } from '../../../hooks/useResizeTextAreaHeight';
 import { useInput } from '../../../hooks/useInput';
+import { useResizeTextareaHeight } from '../../../hooks/useResizeTextareaHeight';
+
+import BottomBorder from '../BottomBorder';
 
 type Props = {
   fontSize?: string;
@@ -19,7 +19,7 @@ type Props = {
   handleTextareaChange?: (value?: string) => void;
 } & ComponentPropsWithoutRef<'textarea'>;
 
-export default function TextArea({
+export default function Textarea({
   fontSize = '1.6rem',
   fontWeight = 400,
   initialValue = '',
@@ -33,7 +33,7 @@ export default function TextArea({
 }: Props) {
   const { value, setValue } = useInput(initialValue);
   const ref = useRef<HTMLTextAreaElement>(null);
-  useResizeTextAreaHeight(ref, value);
+  useResizeTextareaHeight(ref, value);
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const text = event.currentTarget.value;
@@ -44,7 +44,7 @@ export default function TextArea({
 
   return (
     <S.Container backgroundColor={backgroundColor}>
-      <S.TextArea
+      <S.Textarea
         fontSize={fontSize}
         fontWeight={fontWeight}
         rows={rows}
@@ -71,7 +71,7 @@ const S = {
     background-color: ${({ backgroundColor }) => backgroundColor};
   `,
 
-  TextArea: styled.textarea<{
+  Textarea: styled.textarea<{
     fontSize: string;
     fontWeight: number;
     margin: string;

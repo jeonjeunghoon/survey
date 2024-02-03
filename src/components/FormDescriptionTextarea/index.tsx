@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import { editDescription } from '../../store/form/formSlice';
 
-import TextArea from '../common/TextArea';
+import Textarea from '../common/Textarea';
 
 export default function FormDescriptionTextarea() {
   const { description } = useSelector((state: RootState) => state.form);
@@ -12,7 +12,7 @@ export default function FormDescriptionTextarea() {
 
   return (
     <S.Wrapper>
-      <TextArea
+      <Textarea
         placeholder='설문지 설명'
         initialValue={description}
         handleTextareaChange={(value?: string) => dispatch(editDescription({ description: value }))}

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import { editTitle } from '../../store/form/formSlice';
 
-import TextArea from '../common/TextArea';
+import Textarea from '../common/Textarea';
 
 export default function FormTitleTextarea() {
   const { title } = useSelector((state: RootState) => state.form);
@@ -12,7 +12,7 @@ export default function FormTitleTextarea() {
 
   return (
     <S.Wrapper>
-      <TextArea
+      <Textarea
         fontSize='3.6rem'
         placeholder='설문지 제목'
         initialValue={title}
