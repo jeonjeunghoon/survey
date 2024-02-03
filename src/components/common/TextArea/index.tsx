@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { useInput } from '../../../hooks/useInput';
 import { useResizeTextareaHeight } from '../../../hooks/useResizeTextareaHeight';
 
-import BottomBorder from '../BottomBorder';
+import BottomBorderAnimation from '../BottomBorderAnimation';
 
 type Props = {
   fontSize?: string;
@@ -15,6 +15,7 @@ type Props = {
   backgroundColor?: string;
   margin?: string;
   isFocus?: boolean;
+  hasBorderBottom?: boolean;
   placeholder?: string;
   handleTextareaChange?: (value?: string) => void;
 } & ComponentPropsWithoutRef<'textarea'>;
@@ -27,6 +28,7 @@ export default function Textarea({
   backgroundColor = 'inherit',
   margin = '',
   isFocus = false,
+  hasBorderBottom = true,
   placeholder,
   handleTextareaChange,
   ...rest
@@ -43,7 +45,7 @@ export default function Textarea({
   };
 
   return (
-    <S.Container backgroundColor={backgroundColor}>
+    <S.Container hasBorderBottom={hasBorderBottom} backgroundColor={backgroundColor}>
       <S.Textarea
         fontSize={fontSize}
         fontWeight={fontWeight}
@@ -55,19 +57,18 @@ export default function Textarea({
         onChange={handleChange}
         {...rest}
       />
-      {isFocus && <BottomBorder startAnimation={isFocus} />}
+      {isFocus && <BottomBorderAnimation startAnimation={isFocus} />}
     </S.Container>
   );
 }
 
 const S = {
-  Container: styled.div<{
-    backgroundColor: string;
-  }>`
+  Container: styled.div<{ hasBorderBottom: boolean; backgroundColor: string }>`
     display: flex;
     flex: 1;
     position: relative;
 
+    border-bottom: ${({ hasBorderBottom }) => (hasBorderBottom ? '1px solid black' : '')};
     background-color: ${({ backgroundColor }) => backgroundColor};
   `,
 

@@ -16,6 +16,7 @@ export default function FormDescriptionTextarea() {
         placeholder='설문지 설명'
         initialValue={description}
         handleTextareaChange={(value?: string) => dispatch(editDescription({ description: value }))}
+        hasBorderBottom={false}
       />
     </S.Wrapper>
   );

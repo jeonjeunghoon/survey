@@ -7,7 +7,7 @@ type Props = {
   type: QuestionType;
 };
 
-export default function Answer({ type }: Props) {
+export default function FormAnswer({ type }: Props) {
   const answerTable = {
     width: type === QUESTION_TYPE.단답형 ? '50%' : '90%',
     text: type === QUESTION_TYPE.단답형 ? '단답형 텍스트' : '장문형 텍스트',
@@ -23,9 +23,10 @@ export default function Answer({ type }: Props) {
 const S = {
   AnswerWrapper: styled.div<{ width: string }>`
     width: ${({ width }) => width};
-    margin-top: 20px;
+    margin-top: 24px;
 
-    border-bottom: 1px solid #dadce0;
+    border-bottom: 1px dotted #dadce0;
+    cursor: default;
   `,
 
   AnswerText: styled.p`

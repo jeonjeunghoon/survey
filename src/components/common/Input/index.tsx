@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 
 import { useInput } from '../../../hooks/useInput';
 
-import BottomBorder from '../BottomBorder';
+import BottomBorderAnimation from '../BottomBorderAnimation';
 
 type Props = {
   type?: string;
@@ -28,10 +28,7 @@ export default function Input({
   handleInputChange,
   ...rest
 }: Props) {
-  const { value, isFocus, setValue, handleFocus, handleBlur } = useInput(
-    initialValue,
-    handleInputChange,
-  );
+  const { value, isFocus, setValue, handleFocus, handleBlur } = useInput(initialValue);
 
   return (
     <S.Container>
@@ -48,7 +45,7 @@ export default function Input({
         onBlur={handleBlur}
         {...rest}
       />
-      <BottomBorder startAnimation={isFocus} />
+      {isFocus && <BottomBorderAnimation startAnimation={isFocus} />}
     </S.Container>
   );
 }
@@ -59,7 +56,6 @@ const S = {
     flex: 1;
     position: relative;
     min-height: 1.5rem;
-    margin-top: 8px;
   `,
 
   Input: styled.input<{
@@ -69,6 +65,7 @@ const S = {
     backgroundColor: string;
   }>`
     width: 100%;
+    padding: 8px 0;
 
     border: none;
     outline: none;
@@ -77,5 +74,9 @@ const S = {
     color: ${({ fontColor }) => fontColor};
     background-color: ${({ backgroundColor }) => backgroundColor};
     letter-spacing: 0;
+
+    &:hover {
+      border-bottom: 1px dotted #e0e0e0;
+    }
   `,
 };

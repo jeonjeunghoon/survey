@@ -1,21 +1,21 @@
 import styled from '@emotion/styled';
-import { useSelector } from 'react-redux';
 
+import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 
-import QuestionCard from '../QuestionCard';
+import ViewformQuestionCard from '../ViewformQuestionCard';
 
-export default function QuestionCardList() {
+export default function ViewformQuestionCardList() {
   const { questionList } = useSelector((state: RootState) => state.form);
 
   if (!questionList || !questionList.length) return null;
 
   return (
-    <S.List>
+    <ul>
       {questionList.map(({ id, type, question, optionList, hasOtherOption, isRequired }) => {
         return (
           <S.Item key={id}>
-            <QuestionCard
+            <ViewformQuestionCard
               id={id}
               type={type}
               question={question}
@@ -26,13 +26,11 @@ export default function QuestionCardList() {
           </S.Item>
         );
       })}
-    </S.List>
+    </ul>
   );
 }
 
 const S = {
-  List: styled.ul``,
-
   Item: styled.li`
     margin-top: 12px;
   `,

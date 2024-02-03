@@ -4,13 +4,8 @@ type Props = {
   startAnimation: boolean;
 };
 
-export default function BottomBorder({ startAnimation }: Props) {
-  return (
-    <>
-      <S.BottomBorder />
-      <S.BottomBorderAnimation startAnimation={startAnimation} />
-    </>
-  );
+export default function BottomBorderAnimation({ startAnimation }: Props) {
+  return <S.BottomBorderAnimation startAnimation={startAnimation} />;
 }
 
 const S = {

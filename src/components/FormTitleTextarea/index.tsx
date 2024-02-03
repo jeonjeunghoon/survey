@@ -17,6 +17,7 @@ export default function FormTitleTextarea() {
         placeholder='설문지 제목'
         initialValue={title}
         handleTextareaChange={(value?: string) => dispatch(editTitle({ title: value }))}
+        hasBorderBottom={false}
       />
     </S.Wrapper>
   );

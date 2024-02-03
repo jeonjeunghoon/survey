@@ -1,11 +1,13 @@
 import styled from '@emotion/styled';
 
 import ViewformTitleCard from '../../components/ViewformTitleCard';
+import ViewformQuestionCardList from '../../components/ViewformQuestionCardList';
 
 export default function Viewform() {
   return (
     <S.Container>
       <ViewformTitleCard />
+      <ViewformQuestionCardList />
     </S.Container>
   );
 }
