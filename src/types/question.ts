@@ -1,6 +1,6 @@
 export type QuestionType = 'singleChoice' | 'shortAnswer' | 'longAnswer' | 'checkbox' | 'dropdown';
 
-type SelectedSingleOption = {
+type SelectedOption = {
   option: string;
   index: number;
 };
@@ -13,5 +13,6 @@ export type Question = {
   hasOtherOption: boolean;
   isRequired: boolean;
   answer?: string | null;
-  selectedSingleOption?: SelectedSingleOption | null;
+  selectedSingleOption?: SelectedOption | null;
+  selectedMultipleOption?: SelectedOption[] | null;
 };
