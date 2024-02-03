@@ -4,7 +4,7 @@ import { QuestionType } from '../../types/question';
 
 import { isRenderAnswer } from '../../constants/option';
 
-import FormCard from '../FormCard';
+import Card from '../Card';
 import ViewformAnswer from '../ViewformAnswer';
 import ViewformOptionList from '../ViewformOptionList';
 
@@ -26,7 +26,7 @@ export default function ViewformQuestionCard({
   isRequired,
 }: Props) {
   return (
-    <FormCard>
+    <Card>
       <S.Container>
         <S.TextContainer>
           <S.QuestionText>{question}</S.QuestionText>
@@ -38,7 +38,7 @@ export default function ViewformQuestionCard({
           <ViewformOptionList type={type} optionList={optionList} hasOtherOption={hasOtherOption} />
         )}
       </S.Container>
-    </FormCard>
+    </Card>
   );
 }
 

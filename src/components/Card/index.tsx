@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 
 import { useCheckFocusingDiv } from '../../hooks/useCheckFocusingDiv';
 
-export default function FormCard({ children }: PropsWithChildren) {
+export default function Card({ children }: PropsWithChildren) {
   const { ref, isFocus } = useCheckFocusingDiv(false);
 
   return (

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { Question } from '../../types/question';
 import { useCheckFocusingDiv } from '../../hooks/useCheckFocusingDiv';
 
-import FormCard from '../FormCard';
+import Card from '../Card';
 import Header from './Header';
 import Body from './Body';
 import Footer from './Footer';
@@ -18,7 +18,7 @@ export default function FormQuestionCard({
   const { ref, isFocus } = useCheckFocusingDiv(false);
 
   return (
-    <FormCard>
+    <Card>
       <S.FormQuestionCardContainer ref={ref}>
         <S.DragWrapper />
         <S.Container>
@@ -28,7 +28,7 @@ export default function FormQuestionCard({
           <Footer id={id} />
         </S.Container>
       </S.FormQuestionCardContainer>
-    </FormCard>
+    </Card>
   );
 }
 

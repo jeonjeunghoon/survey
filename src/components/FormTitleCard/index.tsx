@@ -2,14 +2,14 @@ import { PropsWithChildren } from 'react';
 
 import styled from '@emotion/styled';
 
-import FormCard from '../FormCard';
+import Card from '../Card';
 
 export default function FormTitleCard({ children }: PropsWithChildren) {
   return (
-    <FormCard>
+    <Card>
       <S.RoundedEdgeTopCover />
       <S.FormContainer>{children}</S.FormContainer>
-    </FormCard>
+    </Card>
   );
 }
 
