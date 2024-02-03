@@ -28,7 +28,10 @@ export default function Input({
   handleInputChange,
   ...rest
 }: Props) {
-  const { value, isFocus, setValue, handleFocus, handleBlur } = useInput(initialValue);
+  const { value, isFocus, setValue, handleFocus, handleBlur } = useInput(
+    initialValue,
+    handleInputChange,
+  );
 
   return (
     <S.Container>
