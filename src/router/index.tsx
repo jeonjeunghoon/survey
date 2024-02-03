@@ -15,7 +15,7 @@ export default function Router() {
           element: <Form />,
         },
         {
-          path: 'view',
+          path: 'viewform',
           element: <Viewform />,
         },
       ],
