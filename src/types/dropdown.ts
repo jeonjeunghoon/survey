@@ -6,5 +6,5 @@ export type DropdownMenu = {
   text: string;
   icon?: ReactElement;
   type?: QuestionType;
-  handleClick?: (selectedType: QuestionType) => void;
+  handleClick?: () => void;
 };

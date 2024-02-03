@@ -16,6 +16,7 @@ const INITIAL_QUESTION: Question = {
   question: '제목없는 질문',
   optionList: ['옵션 1'],
   answer: null,
+  selectedSingleOption: null,
   hasOtherOption: false,
   isRequired: false,
 };
@@ -199,6 +200,23 @@ export const formSlice = createSlice({
       const targetQuestionFormIndex = findTargetIndex(questionList, id);
       questionList[targetQuestionFormIndex].answer = answer;
     },
+
+    selectSingleOption: (
+      state,
+      action: PayloadAction<{
+        id: number;
+        selectedOption: { option: string; index: number } | null;
+      }>,
+    ) => {
+      const { id, selectedOption } = action.payload;
+
+      const { questionList } = state;
+
+      if (!questionList) return;
+
+      const targetQuestionFormIndex = findTargetIndex(questionList, id);
+      questionList[targetQuestionFormIndex].selectedSingleOption = selectedOption;
+    },
   },
 });
 
@@ -219,6 +237,7 @@ export const {
   changeQuestionOrder,
   changeOptionOrder,
   storeAnswer,
+  selectSingleOption,
 } = formSlice.actions;
 
 export default formSlice.reducer;

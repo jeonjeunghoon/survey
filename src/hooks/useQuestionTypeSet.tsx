@@ -28,8 +28,6 @@ const TYPE_TABLE = {
 
 export const useQuestionTypeSet = (id: number, type: QuestionType) => {
   const dispatch = useDispatch();
-  const handleClick = (selectedType: QuestionType) =>
-    dispatch(editType({ id, questionType: selectedType }));
 
   const defaultQuestionType: Omit<DropdownMenu, 'handleClick'> = {
     type,
@@ -42,31 +40,31 @@ export const useQuestionTypeSet = (id: number, type: QuestionType) => {
       type: QUESTION_TYPE.단답형,
       icon: TYPE_TABLE[QUESTION_TYPE.단답형].ICON,
       text: TYPE_TABLE[QUESTION_TYPE.단답형].TEXT,
-      handleClick,
+      handleClick: () => dispatch(editType({ id, questionType: QUESTION_TYPE.단답형 })),
     },
     {
       type: QUESTION_TYPE.장문형,
       icon: TYPE_TABLE[QUESTION_TYPE.장문형].ICON,
       text: TYPE_TABLE[QUESTION_TYPE.장문형].TEXT,
-      handleClick,
+      handleClick: () => dispatch(editType({ id, questionType: QUESTION_TYPE.장문형 })),
     },
     {
       type: QUESTION_TYPE.객관식질문,
       icon: TYPE_TABLE[QUESTION_TYPE.객관식질문].ICON,
       text: TYPE_TABLE[QUESTION_TYPE.객관식질문].TEXT,
-      handleClick,
+      handleClick: () => dispatch(editType({ id, questionType: QUESTION_TYPE.객관식질문 })),
     },
     {
       type: QUESTION_TYPE.체크박스,
       icon: TYPE_TABLE[QUESTION_TYPE.체크박스].ICON,
       text: TYPE_TABLE[QUESTION_TYPE.체크박스].TEXT,
-      handleClick,
+      handleClick: () => dispatch(editType({ id, questionType: QUESTION_TYPE.체크박스 })),
     },
     {
       type: QUESTION_TYPE.드롭다운,
       icon: TYPE_TABLE[QUESTION_TYPE.드롭다운].ICON,
       text: TYPE_TABLE[QUESTION_TYPE.드롭다운].TEXT,
-      handleClick,
+      handleClick: () => dispatch(editType({ id, questionType: QUESTION_TYPE.드롭다운 })),
     },
   ];
 
