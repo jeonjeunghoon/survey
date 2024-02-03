@@ -15,6 +15,7 @@ const INITIAL_QUESTION: Question = {
   type: 'singleChoice',
   question: '제목없는 질문',
   optionList: ['옵션 1'],
+  answer: null,
   hasOtherOption: false,
   isRequired: false,
 };
@@ -187,6 +188,17 @@ export const formSlice = createSlice({
     changeQuestionOrder: () => {},
 
     changeOptionOrder: () => {},
+
+    storeAnswer: (state, action: PayloadAction<{ id: number; answer: string | null }>) => {
+      const { id, answer } = action.payload;
+
+      const { questionList } = state;
+
+      if (!questionList || answer === null) return;
+
+      const targetQuestionFormIndex = findTargetIndex(questionList, id);
+      questionList[targetQuestionFormIndex].answer = answer;
+    },
   },
 });
 
@@ -206,6 +218,7 @@ export const {
   toggleRequired,
   changeQuestionOrder,
   changeOptionOrder,
+  storeAnswer,
 } = formSlice.actions;
 
 export default formSlice.reducer;

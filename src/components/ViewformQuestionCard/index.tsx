@@ -33,7 +33,7 @@ export default function ViewformQuestionCard({
           <S.RequiredText>{isRequired ? '*' : ''}</S.RequiredText>
         </S.TextContainer>
         {isRenderAnswer(type) ? (
-          <ViewformAnswer type={type} />
+          <ViewformAnswer id={id} type={type} />
         ) : (
           <ViewformOptionList type={type} optionList={optionList} hasOtherOption={hasOtherOption} />
         )}

@@ -14,7 +14,7 @@ export default function FormQuestionCard({
   question,
   optionList,
   hasOtherOption,
-}: Omit<Question, 'isRequired'>) {
+}: Omit<Question, 'answer' | 'isRequired'>) {
   const { ref, isFocus } = useCheckFocusingDiv(false);
 
   return (
