@@ -1,17 +1,14 @@
+import { PropsWithChildren } from 'react';
+
 import styled from '@emotion/styled';
 
 import FormCard from '../FormCard';
-import FormTitleTextarea from '../FormTitleTextarea';
-import FormDescriptionTextarea from '../FormDescriptionTextarea';
 
-export default function FormTitleCard() {
+export default function FormTitleCard({ children }: PropsWithChildren) {
   return (
     <FormCard>
       <S.RoundedEdgeTopCover />
-      <S.FormContainer>
-        <FormTitleTextarea />
-        <FormDescriptionTextarea />
-      </S.FormContainer>
+      <S.FormContainer>{children}</S.FormContainer>
     </FormCard>
   );
 }
@@ -21,7 +18,7 @@ const S = {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 22px 24px 24px 24px;
+    padding: 22px 0 24px 0;
   `,
 
   RoundedEdgeTopCover: styled.div`

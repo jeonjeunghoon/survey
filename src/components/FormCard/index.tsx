@@ -17,8 +17,6 @@ export default function FormCard({ children }: PropsWithChildren) {
 
 const S = {
   Section: styled.section`
-    display: flex;
-    justify-content: center;
     position: relative;
 
     border: 1px solid rgb(218, 220, 224);

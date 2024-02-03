@@ -23,7 +23,7 @@ export default function FormDescriptionTextarea() {
 
 const S = {
   Wrapper: styled.div`
-    margin-top: 4px;
+    margin: 4px 24px 0 24px;
 
     textarea {
       padding: 4px 0;

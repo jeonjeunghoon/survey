@@ -26,7 +26,7 @@ const S = {
   Wrapper: styled.div`
     display: flex;
     flex: 1;
-    margin-top: 8px;
+    margin: 8px 24px 0 24px;
     padding-bottom: 8px;
 
     textarea {

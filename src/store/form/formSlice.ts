@@ -6,6 +6,7 @@ import { QUESTION_TYPE } from '../../hooks/useQuestionTypeSet';
 type FormState = {
   title: string;
   description: string;
+  hasRequired: boolean;
   questionList: Question[] | null;
 };
 
@@ -21,6 +22,7 @@ const INITIAL_QUESTION: Question = {
 const initialState: FormState = {
   title: '제목 없는 설문지',
   description: '',
+  hasRequired: false,
   questionList: [INITIAL_QUESTION],
 };
 
@@ -50,6 +52,7 @@ export const formSlice = createSlice({
     addSingleChoiceQuestion: (state) => {
       const NEW_QUESTION: Question = {
         ...INITIAL_QUESTION,
+        question: '',
         id: state.questionList
           ? Math.max(...state.questionList.map((question) => question.id)) + 1
           : 0,
@@ -168,13 +171,17 @@ export const formSlice = createSlice({
 
     toggleRequired: (state, action: PayloadAction<{ id: number }>) => {
       const { id } = action.payload;
+      const { questionList } = state;
 
-      if (!state.questionList) return;
+      if (!questionList) return;
 
-      const targetQuestionFormIndex = findTargetIndex(state.questionList, id);
-      const isRequired = state.questionList[targetQuestionFormIndex].isRequired;
+      const targetQuestionFormIndex = findTargetIndex(questionList, id);
+      const newIsRequired = !questionList[targetQuestionFormIndex].isRequired;
 
-      state.questionList[targetQuestionFormIndex].isRequired = !isRequired;
+      questionList[targetQuestionFormIndex].isRequired = newIsRequired;
+
+      if (questionList.some(({ isRequired }) => isRequired)) state.hasRequired = true;
+      else state.hasRequired = false;
     },
 
     changeQuestionOrder: () => {},
