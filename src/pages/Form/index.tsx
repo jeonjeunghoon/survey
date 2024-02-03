@@ -1,17 +1,14 @@
 import styled from '@emotion/styled';
 
 import FormPanel from '../../components/FormPanel';
-import FormCard from '../../components/FormCard';
 import QuestionCardList from '../../components/QuestionCardList';
-import FormTitle from '../../components/FormTitle';
+import FormTitleCard from '../../components/FormTitleCard';
 
 export default function Form() {
   return (
     <S.Container>
       <FormPanel />
-      <FormCard isTitle>
-        <FormTitle />
-      </FormCard>
+      <FormTitleCard />
       <QuestionCardList />
     </S.Container>
   );

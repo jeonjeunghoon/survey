@@ -4,17 +4,12 @@ import styled from '@emotion/styled';
 
 import { useCheckFocusingDiv } from '../../hooks/useCheckFocusingDiv';
 
-type Props = {
-  isTitle?: boolean;
-} & PropsWithChildren;
-
-export default function FormCard({ isTitle = false, children }: Props) {
-  const { ref, isFocus } = useCheckFocusingDiv(isTitle);
+export default function FormCard({ children }: PropsWithChildren) {
+  const { ref, isFocus } = useCheckFocusingDiv(false);
 
   return (
     <S.Section ref={ref}>
       {isFocus && <S.RoundedEdgeLeftCover />}
-      {isTitle && <S.RoundedEdgeTopCover />}
       {children}
     </S.Section>
   );
@@ -46,16 +41,5 @@ const S = {
     border-radius: 8px 0 0 8px;
 
     background-color: ${({ theme }) => theme.colors.blue};
-  `,
-
-  RoundedEdgeTopCover: styled.div`
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    width: calc(100% + 2px);
-    height: 10px;
-    border-radius: 8px 8px 0 0;
-
-    background-color: ${({ theme }) => theme.colors.primary};
   `,
 };

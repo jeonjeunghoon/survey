@@ -1,0 +1,36 @@
+import styled from '@emotion/styled';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../store';
+import { editTitle } from '../../store/form/formSlice';
+
+import TextArea from '../common/TextArea';
+
+export default function FormTitleTextarea() {
+  const { title } = useSelector((state: RootState) => state.form);
+  const dispatch = useDispatch();
+
+  return (
+    <S.Wrapper>
+      <TextArea
+        fontSize='3.6rem'
+        placeholder='설문지 제목'
+        initialValue={title}
+        handleTextareaChange={(value?: string) => dispatch(editTitle({ title: value }))}
+      />
+    </S.Wrapper>
+  );
+}
+
+const S = {
+  Wrapper: styled.div`
+    display: flex;
+    flex: 1;
+    margin-top: 8px;
+    padding-bottom: 8px;
+
+    textarea {
+      padding: 8px 0;
+    }
+  `,
+};
