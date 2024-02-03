@@ -24,7 +24,9 @@ export default function MenuList({
       {dropdownMenuList.map((menu) => {
         const handleMenuClick = () => {
           closeMenu();
-          menu.handleClick(menu.type);
+
+          if (menu.handleClick && menu.type) menu.handleClick(menu.type);
+
           changeSelectedMenu(menu);
         };
 

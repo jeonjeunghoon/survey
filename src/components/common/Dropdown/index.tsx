@@ -9,7 +9,7 @@ import DownArrowIcon from '../../../assets/svg/down-arrow.svg?react';
 
 type Props = {
   dropdownMenuList: DropdownMenu[];
-  defaultMenu?: Omit<DropdownMenu, 'handleClick'>;
+  defaultMenu?: DropdownMenu;
 };
 
 export default function Dropdown({ dropdownMenuList, defaultMenu = dropdownMenuList[0] }: Props) {

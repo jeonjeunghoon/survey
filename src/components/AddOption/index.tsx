@@ -3,18 +3,15 @@ import styled from '@emotion/styled';
 import { useDispatch } from 'react-redux';
 import { addOption, addOtherOption } from '../../store/form/formSlice';
 
-import { QuestionType } from '../../types/question';
+import { Question } from '../../types/question';
 import { isRenderOtherOptionButton } from '../../constants/option';
 
 import Button from '../common/Button';
 import FormOption from '../FormOption';
 
 type Props = {
-  id: number;
-  type: QuestionType;
   index: number;
-  hasOtherOption: boolean;
-};
+} & Omit<Question, 'question' | 'optionList' | 'answer' | 'isRequired'>;
 
 export default function AddOption({ id, type, index, hasOtherOption }: Props) {
   const dispatch = useDispatch();
