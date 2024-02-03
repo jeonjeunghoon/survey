@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 import FormPanel from '../../components/FormPanel';
-import FormTitleCard from '../../components/FormTitleCard';
+import TitleCard from '../../components/TitleCard';
 import FormTitleTextarea from '../../components/FormTitleTextarea';
 import FormDescriptionTextarea from '../../components/FormDescriptionTextarea';
 import FormQuestionCardList from '../../components/FormQuestionCardList';
@@ -10,10 +10,10 @@ export default function Form() {
   return (
     <S.Container>
       <FormPanel />
-      <FormTitleCard>
+      <TitleCard>
         <FormTitleTextarea />
         <FormDescriptionTextarea />
-      </FormTitleCard>
+      </TitleCard>
       <FormQuestionCardList />
     </S.Container>
   );

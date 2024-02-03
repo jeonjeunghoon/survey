@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 
-import FormTitleCard from '../../components/FormTitleCard';
+import TitleCard from '../TitleCard';
 import FormTitleText from '../../components/FormTitleText';
 import FormDescriptionText from '../../components/FormDescriptionText';
 
@@ -11,7 +11,7 @@ export default function ViewformTitleCard() {
   const { hasRequired } = useSelector((state: RootState) => state.form);
 
   return (
-    <FormTitleCard>
+    <TitleCard>
       <FormTitleText />
       <FormDescriptionText />
       {hasRequired && (
@@ -22,7 +22,7 @@ export default function ViewformTitleCard() {
           </S.FooterWrapper>
         </>
       )}
-    </FormTitleCard>
+    </TitleCard>
   );
 }
 

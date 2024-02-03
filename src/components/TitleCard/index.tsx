@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 
 import Card from '../Card';
 
-export default function FormTitleCard({ children }: PropsWithChildren) {
+export default function TitleCard({ children }: PropsWithChildren) {
   return (
     <Card>
       <S.RoundedEdgeTopCover />
