@@ -104,7 +104,7 @@ export const formSlice = createSlice({
 
       const targetQuestionFormIndex = findTargetIndex(state.questionList, id);
       const optionList = state.questionList[targetQuestionFormIndex].optionList;
-      optionList?.push(`옵션 ${optionList.length + 1}`);
+      optionList.push(`옵션 ${optionList.length + 1}`);
     },
 
     deleteOption: (state, action: PayloadAction<{ id: number; index: number }>) => {
@@ -114,7 +114,7 @@ export const formSlice = createSlice({
 
       const targetQuestionFormIndex = findTargetIndex(state.questionList, id);
       const optionList = state.questionList[targetQuestionFormIndex].optionList;
-      optionList?.splice(index, 1);
+      optionList.splice(index, 1);
     },
 
     editOption: (state, action: PayloadAction<{ id: number; index: number; option: string }>) => {

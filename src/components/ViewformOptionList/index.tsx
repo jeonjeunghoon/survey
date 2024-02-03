@@ -1,27 +1,28 @@
 import styled from '@emotion/styled';
 
 import { QuestionType } from '../../types/question';
-import Input from '../common/Input';
 
 type Props = {
+  id: number;
   type: QuestionType;
-  optionList: string[] | null;
+  optionList: string[];
   hasOtherOption: boolean;
 };
 
-export default function ViewformOptionList({ type, optionList, hasOtherOption }: Props) {
+export default function ViewformOptionList({ id, type, optionList, hasOtherOption }: Props) {
   return (
     <>
       <ul>
-        {optionList?.map((option, index) => (
+        {optionList.map((option, index) => (
           <S.OptionContainer key={`${index}-${option}`}>
-            {/* <Option id={id} type={type} text={option} index={index} isEdit={isEdit} /> */}
+            {/* <FormOption id={id} type={type} text={option} index={index} /> */}
           </S.OptionContainer>
         ))}
       </ul>
       {hasOtherOption && (
         <S.OptionContainer key={'otherOption'}>
-          <Input />
+          {/* <FormOption id={id} type={type} text='기타' index={optionList.length} /> */}
+          {/* <Input /> */}
         </S.OptionContainer>
       )}
     </>

@@ -11,14 +11,12 @@ import FormOption from '../FormOption';
 type Props = {
   id: number;
   type: QuestionType;
-  optionList: string[] | null;
+  optionList: string[];
   hasOtherOption: boolean;
 };
 
 export default function FormOptionList({ id, type, optionList, hasOtherOption }: Props) {
   const dispatch = useDispatch();
-
-  if (!optionList) return null;
 
   return (
     <ul>

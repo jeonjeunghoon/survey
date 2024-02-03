@@ -4,7 +4,7 @@ export type Question = {
   id: number;
   type: QuestionType;
   question: string;
-  optionList: string[] | null;
+  optionList: string[];
   answer: string | null;
   hasOtherOption: boolean;
   isRequired: boolean;
