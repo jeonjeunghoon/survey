@@ -123,7 +123,7 @@ export const formSlice = createSlice({
 
       const targetQuestionFormIndex = findTargetIndex(state.questionList, id);
       const optionList = state.questionList[targetQuestionFormIndex].optionList;
-      if (optionList) optionList[index] = option;
+      if (optionList && optionList.length > index) optionList[index] = option;
     },
 
     addOtherOption: (state, action: PayloadAction<{ id: number }>) => {

@@ -19,12 +19,12 @@ type Props = {
 };
 
 export default function FormOption({ id, type, text, index, fontColor = 'black' }: Props) {
+  const dispatch = useDispatch();
   const OPTION_ICON_TABLE = {
     [QUESTION_TYPE.객관식질문]: <CircleIcon stroke='#BDBDBD' fill='white' />,
     [QUESTION_TYPE.체크박스]: <SquareIcon stroke='#BDBDBD' fill='white' />,
     [QUESTION_TYPE.드롭다운]: <S.DropdownIndex>{index + 1}</S.DropdownIndex>,
   };
-  const dispatch = useDispatch();
 
   return (
     <S.Option>

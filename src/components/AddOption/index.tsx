@@ -7,7 +7,7 @@ import { QuestionType } from '../../types/question';
 import { isRenderOtherOptionButton } from '../../constants/option';
 
 import Button from '../common/Button';
-import Option from '../FormOption';
+import FormOption from '../FormOption';
 
 type Props = {
   id: number;
@@ -23,7 +23,7 @@ export default function AddOption({ id, type, index, hasOtherOption }: Props) {
     <S.AddOptionContainer>
       <S.AddOptionWrapper>
         <Button onClick={() => dispatch(addOption({ id }))}>
-          <Option id={id} type={type} text={'옵션 추가'} index={index} fontColor={'#70757A'} />
+          <FormOption id={id} type={type} text={'옵션 추가'} index={index} fontColor={'#70757A'} />
         </Button>
       </S.AddOptionWrapper>
       {isRenderOtherOptionButton(type, hasOtherOption) && (
