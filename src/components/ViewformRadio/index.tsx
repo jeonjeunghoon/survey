@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default function ViewformRadio({ id, disabled = false }: Props) {
-  const { optionList, selectedSingleOption, otherOption, changeSelectedOption } =
+  const { optionList, selectedSingleOption, otherOption, hasOtherOption, changeSelectedOption } =
     useViewformRadio(id);
 
   return (
@@ -27,17 +27,19 @@ export default function ViewformRadio({ id, disabled = false }: Props) {
           </Radio>
         );
       })}
-      <Radio
-        key='기타'
-        value={otherOption}
-        selectedValue={selectedSingleOption}
-        handleRadioChange={() =>
-          changeSelectedOption({ option: otherOption, index: optionList.length })
-        }
-        disabled={disabled}
-      >
-        <OtherOption id={id} />
-      </Radio>
+      {hasOtherOption && (
+        <Radio
+          key='기타'
+          value={otherOption}
+          selectedValue={selectedSingleOption}
+          handleRadioChange={() =>
+            changeSelectedOption({ option: otherOption, index: optionList.length })
+          }
+          disabled={disabled}
+        >
+          <OtherOption id={id} />
+        </Radio>
+      )}
     </>
   );
 }

@@ -1,26 +1,20 @@
 import { isRenderAnswer } from '../../../constants/option';
 import { Question } from '../../../types/question';
+import AddOption from '../../AddOption';
 
 import FormAnswer from '../../FormAnswer';
-import FormOptionSection from '../../FormOptionSection';
+import FormOptionList from '../../FormOptionList';
 
-export default function Body({
-  id,
-  type,
-  optionList,
-  hasOtherOption,
-}: Omit<Question, 'question' | 'answer' | 'isRequired'>) {
+export default function Body({ id, type }: Omit<Question, 'question' | 'answer' | 'isRequired'>) {
   return (
     <>
       {isRenderAnswer(type) ? (
         <FormAnswer type={type} />
       ) : (
-        <FormOptionSection
-          id={id}
-          type={type}
-          optionList={optionList}
-          hasOtherOption={hasOtherOption}
-        />
+        <>
+          <FormOptionList id={id} />
+          <AddOption id={id} />
+        </>
       )}
     </>
   );

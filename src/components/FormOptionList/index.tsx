@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import styled from '@emotion/styled';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,7 +17,6 @@ export default function FormOptionList({ id }: Props) {
   const { optionList, type, hasOtherOption } = useSelector(
     (state: RootState) => state.form.questionList!.find((question) => question.id === id)!,
   );
-  const [options, setOptions] = useState(optionList);
 
   const dispatch = useDispatch();
   const hasDeleteButton = optionList.length > 1;
@@ -29,15 +26,14 @@ export default function FormOptionList({ id }: Props) {
 
   return (
     <ul>
-      {options.map((option, index) => (
+      {optionList.map((option, index) => (
         <S.OptionItem
           key={`${index}-${option}-${Math.random()}`}
           draggable
           onDragStart={() => handleDragStart(index)}
           onDragEnter={() => handleDragEnter(index)}
           onDragEnd={() => {
-            setOptions(dropAndGetNewList(options));
-            dispatch(changeOptionOrder({ id, optionList: options }));
+            dispatch(changeOptionOrder({ id, optionList: dropAndGetNewList(optionList) }));
           }}
           onDragOver={handleDragOver}
         >
