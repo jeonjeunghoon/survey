@@ -13,6 +13,7 @@ export const useDragAndDrop = () => {
 
     const newList = [...list];
     const dragItemValue = newList[dragItem.current];
+    newList.splice(dragItem.current, 1);
     newList.splice(dragOverItem.current, 0, dragItemValue);
     dragItem.current = null;
     dragOverItem.current = null;
