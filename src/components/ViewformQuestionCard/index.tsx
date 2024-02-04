@@ -1,30 +1,35 @@
 import styled from '@emotion/styled';
 
-import { QuestionType } from '../../types/question';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
-import { isRenderAnswer } from '../../constants/option';
+import { QuestionType } from '../../types/question';
 
 import Card from '../Card';
 import ViewformAnswer from '../ViewformAnswer';
-import ViewformOptionList from '../ViewformOptionList';
+import ViewformDropdown from '../ViewformDropdown';
+import ViewformCheckbox from '../ViewformCheckbox';
+import ViewformRadio from '../ViewformRadio';
+import { QUESTION_TYPE } from '../../constants/question';
 
 type Props = {
   id: number;
   type: QuestionType;
-  question: string;
-  optionList: string[] | null;
-  hasOtherOption: boolean;
-  isRequired: boolean;
 };
 
-export default function ViewformQuestionCard({
-  id,
-  type,
-  question,
-  optionList,
-  hasOtherOption,
-  isRequired,
-}: Props) {
+export default function ViewformQuestionCard({ id, type }: Props) {
+  const { question, isRequired } = useSelector(
+    (state: RootState) => state.form.questionList!.find((question) => question.id === id)!,
+  );
+
+  const ANSWER_RENDER_TABLE = {
+    [QUESTION_TYPE.단답형]: <ViewformAnswer id={id} />,
+    [QUESTION_TYPE.장문형]: <ViewformAnswer id={id} />,
+    [QUESTION_TYPE.객관식질문]: <ViewformRadio id={id} />,
+    [QUESTION_TYPE.체크박스]: <ViewformCheckbox id={id} />,
+    [QUESTION_TYPE.드롭다운]: <ViewformDropdown id={id} />,
+  };
+
   return (
     <Card>
       <S.Container>
@@ -32,11 +37,7 @@ export default function ViewformQuestionCard({
           <S.QuestionText>{question}</S.QuestionText>
           <S.RequiredText>{isRequired ? '*' : ''}</S.RequiredText>
         </S.TextContainer>
-        {isRenderAnswer(type) ? (
-          <ViewformAnswer id={id} type={type} />
-        ) : (
-          <ViewformOptionList type={type} optionList={optionList} hasOtherOption={hasOtherOption} />
-        )}
+        {ANSWER_RENDER_TABLE[type]}
       </S.Container>
     </Card>
   );
