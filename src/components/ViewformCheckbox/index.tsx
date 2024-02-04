@@ -6,9 +6,10 @@ import OtherOption from '../OtherOption';
 
 type Props = {
   id: number;
+  disabled?: boolean;
 };
 
-export default function ViewformCheckbox({ id }: Props) {
+export default function ViewformCheckbox({ id, disabled = false }: Props) {
   const { optionList, selectedOptionList, otherOption, changeSelectedOptionList } =
     useViewformCheckbox(id);
 
@@ -16,12 +17,12 @@ export default function ViewformCheckbox({ id }: Props) {
     <CheckboxGroup valueList={selectedOptionList} handleCheckboxChange={changeSelectedOptionList}>
       {optionList.map((option) => {
         return (
-          <Checkbox key={option} value={option}>
+          <Checkbox key={option} value={option} disabled={disabled}>
             {option}
           </Checkbox>
         );
       })}
-      <Checkbox key='기타' value={otherOption}>
+      <Checkbox key='기타' value={otherOption} disabled={disabled}>
         <OtherOption id={id} />
       </Checkbox>
     </CheckboxGroup>

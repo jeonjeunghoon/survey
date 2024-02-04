@@ -10,22 +10,27 @@ import DownArrowIcon from '../../../assets/svg/down-arrow.svg?react';
 type Props = {
   dropdownMenuList: DropdownMenu[];
   defaultMenu?: DropdownMenu;
+  disabled?: boolean;
 };
 
-export default function Dropdown({ dropdownMenuList, defaultMenu = dropdownMenuList[0] }: Props) {
+export default function Dropdown({
+  dropdownMenuList,
+  defaultMenu = dropdownMenuList[0],
+  disabled = false,
+}: Props) {
   const { isOpen, selectedMenu, ref, isFocus, showMenu, closeMenu, changeSelectedMenu } =
     useDropdown(defaultMenu);
 
   return (
-    <S.Container ref={ref}>
+    <S.Container ref={ref} disabled={disabled} onClick={disabled ? () => {} : showMenu}>
       <MenuList
         dropdownMenuList={dropdownMenuList}
         closeMenu={closeMenu}
         changeSelectedMenu={changeSelectedMenu}
         isShowing={isOpen && isFocus}
       />
-      <S.DefaultContainer onClick={showMenu}>
-        <MenuItem icon={selectedMenu.icon} text={selectedMenu.text} />
+      <S.DefaultContainer>
+        <MenuItem icon={selectedMenu.icon} text={selectedMenu.text} disabled={disabled} />
         <S.ArrowWrapper>
           <DownArrowIcon />
         </S.ArrowWrapper>
@@ -35,7 +40,7 @@ export default function Dropdown({ dropdownMenuList, defaultMenu = dropdownMenuL
 }
 
 const S = {
-  Container: styled.div`
+  Container: styled.div<{ disabled: boolean }>`
     position: relative;
     width: 100%;
     padding: 0 8px;
@@ -43,7 +48,7 @@ const S = {
     border-radius: 4px;
     border: 1px solid #dadce0;
     background-color: white;
-    cursor: pointer;
+    cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
   `,
 
   DefaultContainer: styled.div`

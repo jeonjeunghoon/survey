@@ -7,9 +7,10 @@ import Input from '../common/Input';
 
 type Props = {
   id: number;
+  disabled?: boolean;
 };
 
-export default function ViewformAnswer({ id }: Props) {
+export default function ViewformAnswer({ id, disabled = false }: Props) {
   const { type, initialAnswer, changeAnswer } = useViewformAnswer(id);
   const answerWidthTable = {
     width: type === QUESTION_TYPE.단답형 ? '50%' : '100%',
@@ -17,7 +18,12 @@ export default function ViewformAnswer({ id }: Props) {
 
   return (
     <S.AnswerWrapper width={answerWidthTable.width}>
-      <Input initialValue={initialAnswer} placeholder='내 답변' handleInputChange={changeAnswer} />
+      <Input
+        initialValue={initialAnswer}
+        placeholder='내 답변'
+        handleInputChange={changeAnswer}
+        disabled={disabled}
+      />
     </S.AnswerWrapper>
   );
 }

@@ -5,9 +5,10 @@ import Radio from '../common/Radio';
 
 type Props = {
   id: number;
+  disabled?: boolean;
 };
 
-export default function ViewformRadio({ id }: Props) {
+export default function ViewformRadio({ id, disabled = false }: Props) {
   const { optionList, selectedSingleOption, otherOption, changeSelectedOption } =
     useViewformRadio(id);
 
@@ -20,6 +21,7 @@ export default function ViewformRadio({ id }: Props) {
             value={option}
             selectedValue={selectedSingleOption}
             handleRadioChange={() => changeSelectedOption({ option, index })}
+            disabled={disabled}
           >
             {option}
           </Radio>
@@ -32,6 +34,7 @@ export default function ViewformRadio({ id }: Props) {
         handleRadioChange={() =>
           changeSelectedOption({ option: otherOption, index: optionList.length })
         }
+        disabled={disabled}
       >
         <OtherOption id={id} />
       </Radio>

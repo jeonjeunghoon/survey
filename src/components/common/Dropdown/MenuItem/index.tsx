@@ -5,13 +5,14 @@ import { DropdownMenu } from '../../../../types/dropdown';
 import Button from '../../Button';
 
 type Props = {
+  disabled?: boolean;
   handleMenuClick?: () => void;
 } & Omit<DropdownMenu, 'type' | 'handleClick'>;
 
-export default function MenuItem({ icon, text, handleMenuClick }: Props) {
+export default function MenuItem({ icon, text, disabled, handleMenuClick }: Props) {
   return (
     <S.Item>
-      <Button onClick={handleMenuClick}>
+      <Button onClick={handleMenuClick} disabled={disabled}>
         <S.IconWrapper>{icon}</S.IconWrapper>
         <S.Text>{text}</S.Text>
       </Button>

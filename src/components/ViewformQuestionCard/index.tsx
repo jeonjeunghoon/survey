@@ -15,19 +15,20 @@ import { QUESTION_TYPE } from '../../constants/question';
 type Props = {
   id: number;
   type: QuestionType;
+  disabled?: boolean;
 };
 
-export default function ViewformQuestionCard({ id, type }: Props) {
+export default function ViewformQuestionCard({ id, type, disabled = false }: Props) {
   const { question, isRequired } = useSelector(
     (state: RootState) => state.form.questionList!.find((question) => question.id === id)!,
   );
 
   const ANSWER_RENDER_TABLE = {
-    [QUESTION_TYPE.단답형]: <ViewformAnswer id={id} />,
-    [QUESTION_TYPE.장문형]: <ViewformAnswer id={id} />,
-    [QUESTION_TYPE.객관식질문]: <ViewformRadio id={id} />,
-    [QUESTION_TYPE.체크박스]: <ViewformCheckbox id={id} />,
-    [QUESTION_TYPE.드롭다운]: <ViewformDropdown id={id} />,
+    [QUESTION_TYPE.단답형]: <ViewformAnswer id={id} disabled={disabled} />,
+    [QUESTION_TYPE.장문형]: <ViewformAnswer id={id} disabled={disabled} />,
+    [QUESTION_TYPE.객관식질문]: <ViewformRadio id={id} disabled={disabled} />,
+    [QUESTION_TYPE.체크박스]: <ViewformCheckbox id={id} disabled={disabled} />,
+    [QUESTION_TYPE.드롭다운]: <ViewformDropdown id={id} disabled={disabled} />,
   };
 
   return (
