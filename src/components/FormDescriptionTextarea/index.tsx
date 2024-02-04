@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../store';
+import { descriptionSelector } from '../../store/form/selectors';
 import { editDescription } from '../../store/form/formSlice';
 
 import Textarea from '../common/Textarea';
 
 export default function FormDescriptionTextarea() {
-  const { description } = useSelector((state: RootState) => state.form);
+  const description = useSelector(descriptionSelector);
   const dispatch = useDispatch();
 
   return (
@@ -15,7 +15,7 @@ export default function FormDescriptionTextarea() {
       <Textarea
         placeholder='설문지 설명'
         initialValue={description}
-        handleTextareaChange={(value?: string) => dispatch(editDescription({ description: value }))}
+        handleTextareaChange={(value: string) => dispatch(editDescription({ description: value }))}
         hasBorderBottom={false}
       />
     </S.Wrapper>

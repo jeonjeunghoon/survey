@@ -15,12 +15,8 @@ export const formSlice = createSlice({
       state.title = action.payload.title;
     },
 
-    editDescription: (state, action: PayloadAction<{ description?: string }>) => {
-      const { description } = action.payload;
-
-      if (description === undefined) return;
-
-      state.description = description;
+    editDescription: (state, action: PayloadAction<{ description: string }>) => {
+      state.description = action.payload.description;
     },
 
     addSingleChoiceQuestion: (state) => {
