@@ -17,13 +17,14 @@ type Props = {
 
 export default function FormOptionList({ id, type, optionList, hasOtherOption }: Props) {
   const dispatch = useDispatch();
+  const hasDeleteButton = optionList.length > 1;
 
   return (
     <ul>
       {optionList.map((option, index) => (
-        <S.OptionItem key={`${index}-${option}`}>
+        <S.OptionItem key={`${index}-${option}-${Math.random()}`}>
           <FormOption id={id} type={type} text={option} index={index} />
-          {optionList.length > 1 && (
+          {hasDeleteButton && (
             <DeleteButton handleButtonClick={() => dispatch(deleteOption({ id, index }))} />
           )}
         </S.OptionItem>
@@ -36,6 +37,7 @@ export default function FormOptionList({ id, type, optionList, hasOtherOption }:
             text={'기타...'}
             index={optionList.length}
             fontColor='#70757A'
+            disabled
           />
           <DeleteButton handleButtonClick={() => dispatch(deleteOtherOption({ id }))} />
         </S.OptionItem>

@@ -16,9 +16,17 @@ type Props = {
   text: string;
   index: number;
   fontColor?: string;
+  disabled?: boolean;
 };
 
-export default function FormOption({ id, type, text, index, fontColor = 'black' }: Props) {
+export default function FormOption({
+  id,
+  type,
+  text,
+  index,
+  fontColor = 'black',
+  disabled = false,
+}: Props) {
   const dispatch = useDispatch();
   const OPTION_ICON_TABLE = {
     [QUESTION_TYPE.객관식질문]: <CircleIcon stroke='#BDBDBD' fill='white' />,
@@ -33,6 +41,7 @@ export default function FormOption({ id, type, text, index, fontColor = 'black' 
         initialValue={text}
         fontColor={fontColor}
         handleInputChange={(value: string) => dispatch(editOption({ id, index, option: value }))}
+        disabled={disabled}
       />
     </S.Option>
   );
