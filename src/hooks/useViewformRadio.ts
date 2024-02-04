@@ -3,7 +3,7 @@ import { RootState } from '../store';
 import { selectSingleOption } from '../store/form/formSlice';
 
 export const useViewformRadio = (id: number) => {
-  const { optionList, selectedSingleOption } = useSelector(
+  const { optionList, selectedSingleOption, otherOption } = useSelector(
     (state: RootState) => state.form.questionList!.find((question) => question.id === id)!,
   );
 
@@ -21,6 +21,7 @@ export const useViewformRadio = (id: number) => {
   return {
     optionList,
     selectedSingleOption: selectedSingleOption ? selectedSingleOption.option : null,
+    otherOption: otherOption ?? '',
     changeSelectedOption,
   };
 };

@@ -10,9 +10,10 @@ export type Question = {
   type: QuestionType;
   question: string;
   optionList: string[];
-  hasOtherOption: boolean;
   isRequired: boolean;
+  hasOtherOption: boolean;
   answer?: string | null;
   selectedSingleOption?: SelectedOption | null;
   selectedMultipleOption?: SelectedOption[] | null;
+  otherOption?: string | null;
 };

@@ -15,6 +15,7 @@ const INITIAL_QUESTION: Question = {
   type: 'singleChoice',
   question: '제목없는 질문',
   optionList: ['옵션 1'],
+  otherOption: null,
   answer: null,
   selectedSingleOption: null,
   selectedMultipleOption: null,
@@ -235,6 +236,21 @@ export const formSlice = createSlice({
       const targetQuestionFormIndex = findTargetIndex(questionList, id);
       questionList[targetQuestionFormIndex].selectedMultipleOption = selectedOptionList;
     },
+
+    setOtherOption: (state, action: PayloadAction<{ id: number; option: string }>) => {
+      const { id, option } = action.payload;
+
+      const { questionList } = state;
+
+      if (!questionList) return;
+
+      const targetQuestionFormIndex = findTargetIndex(questionList, id);
+      const target = questionList[targetQuestionFormIndex];
+
+      if (!target.hasOtherOption) return;
+
+      target.otherOption = option;
+    },
   },
 });
 
@@ -257,6 +273,7 @@ export const {
   storeAnswer,
   selectSingleOption,
   selectMultipleOption,
+  setOtherOption,
 } = formSlice.actions;
 
 export default formSlice.reducer;

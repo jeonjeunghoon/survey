@@ -1,4 +1,5 @@
 import { useViewformRadio } from '../../hooks/useViewformRadio';
+import OtherOption from '../OtherOption';
 
 import Radio from '../common/Radio';
 
@@ -7,7 +8,8 @@ type Props = {
 };
 
 export default function ViewformRadio({ id }: Props) {
-  const { optionList, selectedSingleOption, changeSelectedOption } = useViewformRadio(id);
+  const { optionList, selectedSingleOption, otherOption, changeSelectedOption } =
+    useViewformRadio(id);
 
   return (
     <>
@@ -23,6 +25,16 @@ export default function ViewformRadio({ id }: Props) {
           </Radio>
         );
       })}
+      <Radio
+        key='기타'
+        value={otherOption}
+        selectedValue={selectedSingleOption}
+        handleRadioChange={() =>
+          changeSelectedOption({ option: otherOption, index: optionList.length })
+        }
+      >
+        <OtherOption id={id} />
+      </Radio>
     </>
   );
 }
