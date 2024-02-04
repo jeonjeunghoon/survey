@@ -30,11 +30,11 @@ export default function FormOptionList({ id }: Props) {
         <S.OptionItem
           key={`${index}-${option}-${Math.random()}`}
           draggable
-          onDragStart={() => handleDragStart(index)}
-          onDragEnter={() => handleDragEnter(index)}
-          onDragEnd={() => {
-            dispatch(changeOptionOrder({ id, optionList: dropAndGetNewList(optionList) }));
-          }}
+          onDragStart={handleDragStart<HTMLLIElement>(index)}
+          onDragEnter={handleDragEnter<HTMLLIElement>(index)}
+          onDragEnd={dropAndGetNewList(optionList, (newOptionList) =>
+            dispatch(changeOptionOrder({ id, optionList: newOptionList })),
+          )}
           onDragOver={handleDragOver}
         >
           <FormOption id={id} option={option} index={index} />

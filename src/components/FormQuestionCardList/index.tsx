@@ -18,13 +18,13 @@ export default function FormQuestionCardList() {
       {questionList.map(({ id }, index) => {
         return (
           <S.Item
-            key={id}
+            key={`${id}-${Math.random()}`}
             draggable
-            onDragStart={() => handleDragStart(index)}
-            onDragEnter={() => handleDragEnter(index)}
-            onDragEnd={() =>
-              dispatch(changeQuestionOrder({ questionList: dropAndGetNewList(questionList) }))
-            }
+            onDragStart={handleDragStart<HTMLLIElement>(index)}
+            onDragEnter={handleDragEnter<HTMLLIElement>(index)}
+            onDragEnd={dropAndGetNewList(questionList, (newQuestionList) =>
+              dispatch(changeQuestionOrder({ questionList: newQuestionList })),
+            )}
             onDragOver={handleDragOver}
           >
             <FormQuestionCard id={id} />
