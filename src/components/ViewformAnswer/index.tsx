@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { useSelector } from 'react-redux';
 import { selectQuestionTypeById } from '../../store/form/selectors';
 
+import { useDisabled } from '../../hooks/useDisabled';
 import { QUESTION_TYPE } from '../../constants/question';
 import { useViewformAnswer } from '../../hooks/useViewformAnswer';
 
@@ -10,15 +11,15 @@ import Input from '../common/Input';
 
 type Props = {
   id: number;
-  disabled?: boolean;
 };
 
-export default function ViewformAnswer({ id, disabled = false }: Props) {
+export default function ViewformAnswer({ id }: Props) {
   const { answer, changeAnswer } = useViewformAnswer(id);
   const type = useSelector(selectQuestionTypeById(id));
   const answerWidthTable = {
     width: type === QUESTION_TYPE.단답형 ? '50%' : '100%',
   };
+  const isDisabled = useDisabled();
 
   return (
     <S.AnswerWrapper width={answerWidthTable.width}>
@@ -26,7 +27,7 @@ export default function ViewformAnswer({ id, disabled = false }: Props) {
         initialValue={answer}
         placeholder='내 답변'
         handleInputChange={changeAnswer}
-        disabled={disabled}
+        disabled={isDisabled}
       />
     </S.AnswerWrapper>
   );

@@ -1,19 +1,19 @@
 import styled from '@emotion/styled';
 
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { questionListSelector } from '../../store/form/selectors';
 
 import ViewformQuestionCard from '../ViewformQuestionCard';
 
 export default function ReplyList() {
-  const { questionList } = useSelector((state: RootState) => state.form);
+  const questionList = useSelector(questionListSelector);
 
   return (
     <ul>
-      {questionList.map(({ id, type }) => {
+      {questionList.map(({ id }) => {
         return (
           <S.Item key={id}>
-            <ViewformQuestionCard id={id} type={type} disabled={true} />
+            <ViewformQuestionCard id={id} />
           </S.Item>
         );
       })}

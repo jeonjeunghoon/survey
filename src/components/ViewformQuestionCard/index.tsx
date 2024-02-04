@@ -17,20 +17,19 @@ import ViewformRadio from '../ViewformRadio';
 
 type Props = {
   id: number;
-  disabled?: boolean;
 };
 
-export default function ViewformQuestionCard({ id, disabled = false }: Props) {
+export default function ViewformQuestionCard({ id }: Props) {
   const type = useSelector(selectQuestionTypeById(id));
   const question = useSelector(selectQuestionById(id));
   const isRequired = useSelector(selectQuestionIsRequiredById(id));
 
   const ANSWER_RENDER_TABLE = {
-    [QUESTION_TYPE.단답형]: <ViewformAnswer id={id} disabled={disabled} />,
-    [QUESTION_TYPE.장문형]: <ViewformAnswer id={id} disabled={disabled} />,
-    [QUESTION_TYPE.객관식질문]: <ViewformRadio id={id} disabled={disabled} />,
-    [QUESTION_TYPE.체크박스]: <ViewformCheckbox id={id} disabled={disabled} />,
-    [QUESTION_TYPE.드롭다운]: <ViewformDropdown id={id} disabled={disabled} />,
+    [QUESTION_TYPE.단답형]: <ViewformAnswer id={id} />,
+    [QUESTION_TYPE.장문형]: <ViewformAnswer id={id} />,
+    [QUESTION_TYPE.객관식질문]: <ViewformRadio id={id} />,
+    [QUESTION_TYPE.체크박스]: <ViewformCheckbox id={id} />,
+    [QUESTION_TYPE.드롭다운]: <ViewformDropdown id={id} />,
   };
 
   return (

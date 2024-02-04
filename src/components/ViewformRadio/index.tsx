@@ -1,3 +1,4 @@
+import { useDisabled } from '../../hooks/useDisabled';
 import { useViewformRadio } from '../../hooks/useViewformRadio';
 
 import Radio from '../common/Radio';
@@ -5,12 +6,12 @@ import OtherOption from '../OtherOption';
 
 type Props = {
   id: number;
-  disabled?: boolean;
 };
 
-export default function ViewformRadio({ id, disabled = false }: Props) {
+export default function ViewformRadio({ id }: Props) {
   const { optionList, selectedSingleOption, otherOption, hasOtherOption, changeSelectedOption } =
     useViewformRadio(id);
+  const isDisabled = useDisabled();
 
   return (
     <>
@@ -21,7 +22,7 @@ export default function ViewformRadio({ id, disabled = false }: Props) {
             value={option}
             selectedValue={selectedSingleOption}
             handleRadioChange={() => changeSelectedOption({ option, index })}
-            disabled={disabled}
+            disabled={isDisabled}
           >
             {option}
           </Radio>
@@ -35,7 +36,7 @@ export default function ViewformRadio({ id, disabled = false }: Props) {
           handleRadioChange={() =>
             changeSelectedOption({ option: otherOption, index: optionList.length })
           }
-          disabled={disabled}
+          disabled={isDisabled}
         >
           <OtherOption id={id} />
         </Radio>
