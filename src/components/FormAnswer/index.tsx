@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 import { QuestionType } from '../../types/question';
-import { QUESTION_TYPE } from '../../hooks/useQuestionTypeSet';
+import { QUESTION_TYPE } from '../../constants/question';
 
 type Props = {
   type: QuestionType;

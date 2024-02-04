@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { QUESTION_TYPE } from '../../hooks/useQuestionTypeSet';
+import { QUESTION_TYPE } from '../../constants/question';
 import { useViewformAnswer } from '../../hooks/useViewformAnswer';
 
 import Input from '../common/Input';

@@ -12,17 +12,10 @@ export default function ViewformQuestionCardList() {
 
   return (
     <ul>
-      {questionList.map(({ id, type, question, optionList, hasOtherOption, isRequired }) => {
+      {questionList.map(({ id, type }) => {
         return (
           <S.Item key={id}>
-            <ViewformQuestionCard
-              id={id}
-              type={type}
-              question={question}
-              optionList={optionList}
-              hasOtherOption={hasOtherOption}
-              isRequired={isRequired}
-            />
+            <ViewformQuestionCard id={id} type={type} />
           </S.Item>
         );
       })}

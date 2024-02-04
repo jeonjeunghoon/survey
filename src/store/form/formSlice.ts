@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Question, QuestionType } from '../../types/question';
-import { QUESTION_TYPE } from '../../hooks/useQuestionTypeSet';
+import { QUESTION_TYPE } from '../../constants/question';
 
 type FormState = {
   title: string;

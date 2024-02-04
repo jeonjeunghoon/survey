@@ -1,5 +1,5 @@
 import { QuestionType } from '../types/question';
-import { QUESTION_TYPE } from '../hooks/useQuestionTypeSet';
+import { QUESTION_TYPE } from './question';
 
 export const isRenderAnswer = (type: QuestionType) =>
   type === QUESTION_TYPE.단답형 || type === QUESTION_TYPE.장문형;

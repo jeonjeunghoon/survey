@@ -3,20 +3,13 @@ import { editType } from '../store/form/formSlice';
 
 import { QuestionType } from '../types/question';
 import { DropdownMenu } from '../types/dropdown';
+import { QUESTION_TYPE } from '../constants/question';
 
 import CheckboxIcon from '../assets/svg/checkbox.svg?react';
 import CircleDotIcon from '../assets/svg/circle-dot.svg?react';
 import DownArrowCircleIcon from '../assets/svg/down-arrow-circle.svg?react';
 import GripLinesIcon from '../assets/svg/grip-lines.svg?react';
 import LineColumnsIcon from '../assets/svg/line-columns.svg?react';
-
-export const QUESTION_TYPE: Record<string, QuestionType> = {
-  단답형: 'shortAnswer',
-  장문형: 'longAnswer',
-  객관식질문: 'singleChoice',
-  체크박스: 'checkbox',
-  드롭다운: 'dropdown',
-} as const;
 
 const TYPE_TABLE = {
   [QUESTION_TYPE.객관식질문]: { ICON: <CircleDotIcon />, TEXT: '객관식 질문' },
