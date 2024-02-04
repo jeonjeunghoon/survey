@@ -22,14 +22,14 @@ export default function Dropdown({
     useDropdown(defaultMenu);
 
   return (
-    <S.Container ref={ref} disabled={disabled} onClick={disabled ? () => {} : showMenu}>
+    <S.Container ref={ref} disabled={disabled}>
       <MenuList
         dropdownMenuList={dropdownMenuList}
         closeMenu={closeMenu}
         changeSelectedMenu={changeSelectedMenu}
         isShowing={isOpen && isFocus}
       />
-      <S.DefaultContainer>
+      <S.DefaultContainer onClick={disabled ? () => {} : showMenu}>
         <MenuItem icon={selectedMenu.icon} text={selectedMenu.text} disabled={disabled} />
         <S.ArrowWrapper>
           <DownArrowIcon />
