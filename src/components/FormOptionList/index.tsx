@@ -37,7 +37,7 @@ export default function FormOptionList({ id }: Props) {
           }}
           onDragOver={handleDragOver}
         >
-          <FormOption id={id} index={index} />
+          <FormOption id={id} option={option} index={index} />
           {hasDeleteButton && (
             <DeleteButton handleButtonClick={() => dispatch(deleteOption({ id, index }))} />
           )}
@@ -47,7 +47,7 @@ export default function FormOptionList({ id }: Props) {
         <S.OptionItem key={'otherOption'}>
           <FormOption
             id={id}
-            text={'기타...'}
+            option={'기타...'}
             index={optionList.length}
             fontColor='#70757A'
             disabled

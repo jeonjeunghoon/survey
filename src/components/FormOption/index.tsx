@@ -1,28 +1,26 @@
 import styled from '@emotion/styled';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { editOption } from '../../store/form/formSlice';
-import { selectQuestionById } from '../../store/form/selectors';
 
 import Input from '../common/Input';
 import Icon from '../Icon';
 
 type Props = {
   id: number;
+  option: string;
   index: number;
-  text?: string;
   fontColor?: string;
   disabled?: boolean;
 };
 
 export default function FormOption({
   id,
+  option,
   index,
-  text,
   fontColor = 'black',
   disabled = false,
 }: Props) {
-  const question = useSelector(selectQuestionById(id));
   const dispatch = useDispatch();
 
   return (
@@ -31,7 +29,7 @@ export default function FormOption({
         <Icon id={id} index={index + 1} />
       </S.Head>
       <Input
-        initialValue={text ?? question}
+        initialValue={option}
         fontColor={fontColor}
         handleInputChange={(value: string) => dispatch(editOption({ id, index, option: value }))}
         disabled={disabled}
