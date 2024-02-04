@@ -1,28 +1,46 @@
+import { useState } from 'react';
+
 import styled from '@emotion/styled';
 
-import { useDispatch } from 'react-redux';
-import { deleteOption, deleteOtherOption } from '../../store/form/formSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { changeOptionOrder, deleteOption, deleteOtherOption } from '../../store/form/formSlice';
 
-import { QuestionType } from '../../types/question';
+import { useDragAndDrop } from '../../hooks/useDragAndDrop';
 
 import DeleteButton from '../DeleteButton';
 import FormOption from '../FormOption';
 
 type Props = {
   id: number;
-  type: QuestionType;
-  optionList: string[];
-  hasOtherOption: boolean;
 };
 
-export default function FormOptionList({ id, type, optionList, hasOtherOption }: Props) {
+export default function FormOptionList({ id }: Props) {
+  const { optionList, type, hasOtherOption } = useSelector(
+    (state: RootState) => state.form.questionList!.find((question) => question.id === id)!,
+  );
+  const [options, setOptions] = useState(optionList);
+
   const dispatch = useDispatch();
   const hasDeleteButton = optionList.length > 1;
+  const { handleDragStart, handleDragEnter, handleDragOver, dropAndGetNewList } = useDragAndDrop();
+
+  if (!optionList) return;
 
   return (
     <ul>
-      {optionList.map((option, index) => (
-        <S.OptionItem key={`${index}-${option}-${Math.random()}`}>
+      {options.map((option, index) => (
+        <S.OptionItem
+          key={`${index}-${option}-${Math.random()}`}
+          draggable
+          onDragStart={() => handleDragStart(index)}
+          onDragEnter={() => handleDragEnter(index)}
+          onDragEnd={() => {
+            setOptions(dropAndGetNewList(options));
+            dispatch(changeOptionOrder({ id, optionList: options }));
+          }}
+          onDragOver={handleDragOver}
+        >
           <FormOption id={id} type={type} text={option} index={index} />
           {hasDeleteButton && (
             <DeleteButton handleButtonClick={() => dispatch(deleteOption({ id, index }))} />

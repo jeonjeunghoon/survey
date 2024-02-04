@@ -171,6 +171,8 @@ export const formSlice = createSlice({
       const targetQuestionFormIndex = findTargetIndex(state.questionList, id);
 
       state.questionList.splice(targetQuestionFormIndex, 1);
+
+      if (!state.questionList.length) state.questionList = null;
     },
 
     toggleRequired: (state, action: PayloadAction<{ id: number }>) => {
@@ -187,10 +189,6 @@ export const formSlice = createSlice({
       if (questionList.some(({ isRequired }) => isRequired)) state.hasRequired = true;
       else state.hasRequired = false;
     },
-
-    changeQuestionOrder: () => {},
-
-    changeOptionOrder: () => {},
 
     storeAnswer: (state, action: PayloadAction<{ id: number; answer: string | null }>) => {
       const { id, answer } = action.payload;
@@ -267,6 +265,22 @@ export const formSlice = createSlice({
 
       state.questionList = newQuestionList;
     },
+
+    changeQuestionOrder: (state, action: PayloadAction<{ questionList: Question[] }>) => {
+      state.questionList = action.payload.questionList;
+    },
+
+    changeOptionOrder: (state, action: PayloadAction<{ id: number; optionList: string[] }>) => {
+      const { id, optionList } = action.payload;
+
+      const { questionList } = state;
+
+      if (!questionList) return;
+
+      const targetQuestionFormIndex = findTargetIndex(questionList, id);
+
+      questionList[targetQuestionFormIndex].optionList = optionList;
+    },
   },
 });
 
@@ -284,13 +298,13 @@ export const {
   pasteQuestion,
   deleteQuestion,
   toggleRequired,
-  changeQuestionOrder,
-  changeOptionOrder,
   storeAnswer,
   selectSingleOption,
   selectMultipleOption,
   setOtherOption,
   deleteReplies,
+  changeQuestionOrder,
+  changeOptionOrder,
 } = formSlice.actions;
 
 export default formSlice.reducer;

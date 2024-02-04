@@ -12,7 +12,7 @@ type Props = {
 export default function FormOptionSection({ id, type, optionList, hasOtherOption }: Props) {
   return (
     <>
-      <FormOptionList id={id} type={type} optionList={optionList} hasOtherOption={hasOtherOption} />
+      <FormOptionList id={id} />
       <AddOption id={id} type={type} index={optionList.length} hasOtherOption={hasOtherOption} />
     </>
   );
