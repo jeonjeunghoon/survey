@@ -38,7 +38,10 @@ const S = {
   `,
 
   Input: styled.input`
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
+
+    border: 8px solid white;
+    border-radius: 4px;
   `,
 };
