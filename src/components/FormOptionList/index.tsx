@@ -1,8 +1,11 @@
 import styled from '@emotion/styled';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
 import { changeOptionOrder, deleteOption, deleteOtherOption } from '../../store/form/formSlice';
+import {
+  selectQuestionHasOtherOptionById,
+  selectQuestionOptionListById,
+} from '../../store/form/selectors';
 
 import { useDragAndDrop } from '../../hooks/useDragAndDrop';
 
@@ -14,15 +17,12 @@ type Props = {
 };
 
 export default function FormOptionList({ id }: Props) {
-  const { optionList, type, hasOtherOption } = useSelector(
-    (state: RootState) => state.form.questionList.find((question) => question.id === id)!,
-  );
-
+  const optionList = useSelector(selectQuestionOptionListById(id));
+  const hasOtherOption = useSelector(selectQuestionHasOtherOptionById(id));
   const dispatch = useDispatch();
+
   const hasDeleteButton = optionList.length > 1;
   const { handleDragStart, handleDragEnter, handleDragOver, dropAndGetNewList } = useDragAndDrop();
-
-  if (!optionList) return;
 
   return (
     <ul>
@@ -37,7 +37,7 @@ export default function FormOptionList({ id }: Props) {
           }}
           onDragOver={handleDragOver}
         >
-          <FormOption id={id} type={type} text={option} index={index} />
+          <FormOption id={id} index={index} />
           {hasDeleteButton && (
             <DeleteButton handleButtonClick={() => dispatch(deleteOption({ id, index }))} />
           )}
@@ -47,7 +47,6 @@ export default function FormOptionList({ id }: Props) {
         <S.OptionItem key={'otherOption'}>
           <FormOption
             id={id}
-            type={type}
             text={'기타...'}
             index={optionList.length}
             fontColor='#70757A'

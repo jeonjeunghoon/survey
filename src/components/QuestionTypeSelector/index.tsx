@@ -3,15 +3,13 @@ import styled from '@emotion/styled';
 import { useQuestionTypeSet } from '../../hooks/useQuestionTypeSet';
 
 import Dropdown from '../common/Dropdown';
-import { QuestionType } from '../../types/question';
 
 type Props = {
   id: number;
-  type: QuestionType;
 };
 
-export default function QuestionTypeSelector({ id, type }: Props) {
-  const { questionTypeList, defaultQuestionType } = useQuestionTypeSet(id, type);
+export default function QuestionTypeSelector({ id }: Props) {
+  const { questionTypeList, defaultQuestionType } = useQuestionTypeSet(id);
 
   return (
     <S.DropdownWrapper>

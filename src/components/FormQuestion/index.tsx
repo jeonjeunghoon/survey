@@ -1,17 +1,18 @@
 import styled from '@emotion/styled';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectQuestionById } from '../../store/form/selectors';
 import { editQuestion } from '../../store/form/formSlice';
 
 import Textarea from '../common/Textarea';
 
 type Props = {
   id: number;
-  question: string;
   isFocus: boolean;
 };
 
-export default function FormQuestion({ id, question, isFocus }: Props) {
+export default function FormQuestion({ id, isFocus }: Props) {
+  const question = useSelector(selectQuestionById(id));
   const dispatch = useDispatch();
 
   return (
@@ -23,7 +24,7 @@ export default function FormQuestion({ id, question, isFocus }: Props) {
         margin='16px'
         placeholder='질문'
         isFocus={isFocus}
-        handleTextareaChange={(value?: string) => dispatch(editQuestion({ id, question: value }))}
+        handleTextareaChange={(value: string) => dispatch(editQuestion({ id, question: value }))}
       />
     </S.QuestionWrapper>
   );

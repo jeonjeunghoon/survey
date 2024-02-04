@@ -1,21 +1,21 @@
 import styled from '@emotion/styled';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
 import { changeQuestionOrder } from '../../store/form/formSlice';
+import { questionListSelector } from '../../store/form/selectors';
 
 import { useDragAndDrop } from '../../hooks/useDragAndDrop';
 
 import FormQuestionCard from '../FormQuestionCard';
 
 export default function FormQuestionCardList() {
-  const { questionList } = useSelector((state: RootState) => state.form);
+  const questionList = useSelector(questionListSelector);
   const { handleDragStart, handleDragEnter, handleDragOver, dropAndGetNewList } = useDragAndDrop();
   const dispatch = useDispatch();
 
   return (
     <ul>
-      {questionList.map(({ id, type, question, optionList, hasOtherOption }, index) => {
+      {questionList.map(({ id }, index) => {
         return (
           <S.Item
             key={id}
@@ -27,13 +27,7 @@ export default function FormQuestionCardList() {
             }
             onDragOver={handleDragOver}
           >
-            <FormQuestionCard
-              id={id}
-              type={type}
-              question={question}
-              optionList={optionList}
-              hasOtherOption={hasOtherOption}
-            />
+            <FormQuestionCard id={id} />
           </S.Item>
         );
       })}

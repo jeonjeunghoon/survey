@@ -1,13 +1,17 @@
 import styled from '@emotion/styled';
 
-import { QuestionType } from '../../types/question';
+import { useSelector } from 'react-redux';
+import { selectQuestionTypeById } from '../../store/form/selectors';
+
 import { QUESTION_TYPE } from '../../constants/question';
 
 type Props = {
-  type: QuestionType;
+  id: number;
 };
 
-export default function FormAnswer({ type }: Props) {
+export default function FormAnswer({ id }: Props) {
+  const type = useSelector(selectQuestionTypeById(id));
+
   const answerTable = {
     width: type === QUESTION_TYPE.단답형 ? '50%' : '90%',
     text: type === QUESTION_TYPE.단답형 ? '단답형 텍스트' : '장문형 텍스트',

@@ -1,7 +1,7 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectQuestionTypeById } from '../store/form/selectors';
 import { editType } from '../store/form/formSlice';
 
-import { QuestionType } from '../types/question';
 import { DropdownMenu } from '../types/dropdown';
 import { QUESTION_TYPE } from '../constants/question';
 
@@ -19,7 +19,8 @@ const TYPE_TABLE = {
   [QUESTION_TYPE.드롭다운]: { ICON: <DownArrowCircleIcon />, TEXT: '드롭다운' },
 } as const;
 
-export const useQuestionTypeSet = (id: number, type: QuestionType) => {
+export const useQuestionTypeSet = (id: number) => {
+  const type = useSelector(selectQuestionTypeById(id));
   const dispatch = useDispatch();
 
   const defaultQuestionType: Omit<DropdownMenu, 'handleClick'> = {
@@ -33,31 +34,31 @@ export const useQuestionTypeSet = (id: number, type: QuestionType) => {
       type: QUESTION_TYPE.단답형,
       icon: TYPE_TABLE[QUESTION_TYPE.단답형].ICON,
       text: TYPE_TABLE[QUESTION_TYPE.단답형].TEXT,
-      handleClick: () => dispatch(editType({ id, questionType: QUESTION_TYPE.단답형 })),
+      handleClick: () => dispatch(editType({ id, type: QUESTION_TYPE.단답형 })),
     },
     {
       type: QUESTION_TYPE.장문형,
       icon: TYPE_TABLE[QUESTION_TYPE.장문형].ICON,
       text: TYPE_TABLE[QUESTION_TYPE.장문형].TEXT,
-      handleClick: () => dispatch(editType({ id, questionType: QUESTION_TYPE.장문형 })),
+      handleClick: () => dispatch(editType({ id, type: QUESTION_TYPE.장문형 })),
     },
     {
       type: QUESTION_TYPE.객관식질문,
       icon: TYPE_TABLE[QUESTION_TYPE.객관식질문].ICON,
       text: TYPE_TABLE[QUESTION_TYPE.객관식질문].TEXT,
-      handleClick: () => dispatch(editType({ id, questionType: QUESTION_TYPE.객관식질문 })),
+      handleClick: () => dispatch(editType({ id, type: QUESTION_TYPE.객관식질문 })),
     },
     {
       type: QUESTION_TYPE.체크박스,
       icon: TYPE_TABLE[QUESTION_TYPE.체크박스].ICON,
       text: TYPE_TABLE[QUESTION_TYPE.체크박스].TEXT,
-      handleClick: () => dispatch(editType({ id, questionType: QUESTION_TYPE.체크박스 })),
+      handleClick: () => dispatch(editType({ id, type: QUESTION_TYPE.체크박스 })),
     },
     {
       type: QUESTION_TYPE.드롭다운,
       icon: TYPE_TABLE[QUESTION_TYPE.드롭다운].ICON,
       text: TYPE_TABLE[QUESTION_TYPE.드롭다운].TEXT,
-      handleClick: () => dispatch(editType({ id, questionType: QUESTION_TYPE.드롭다운 })),
+      handleClick: () => dispatch(editType({ id, type: QUESTION_TYPE.드롭다운 })),
     },
   ];
 

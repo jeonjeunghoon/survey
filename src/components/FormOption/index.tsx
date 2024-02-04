@@ -1,44 +1,37 @@
 import styled from '@emotion/styled';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { editOption } from '../../store/form/formSlice';
-
-import { QuestionType } from '../../types/question';
-import { QUESTION_TYPE } from '../../constants/question';
+import { selectQuestionById } from '../../store/form/selectors';
 
 import Input from '../common/Input';
-import CircleIcon from '../../assets/svg/circle.svg?react';
-import SquareIcon from '../../assets/svg/square.svg?react';
+import Icon from '../Icon';
 
 type Props = {
   id: number;
-  type: QuestionType;
-  text: string;
   index: number;
+  text?: string;
   fontColor?: string;
   disabled?: boolean;
 };
 
 export default function FormOption({
   id,
-  type,
-  text,
   index,
+  text,
   fontColor = 'black',
   disabled = false,
 }: Props) {
+  const question = useSelector(selectQuestionById(id));
   const dispatch = useDispatch();
-  const OPTION_ICON_TABLE = {
-    [QUESTION_TYPE.객관식질문]: <CircleIcon stroke='#BDBDBD' fill='white' />,
-    [QUESTION_TYPE.체크박스]: <SquareIcon stroke='#BDBDBD' fill='white' />,
-    [QUESTION_TYPE.드롭다운]: <S.DropdownIndex>{index + 1}</S.DropdownIndex>,
-  };
 
   return (
     <S.Option>
-      <S.Head>{OPTION_ICON_TABLE[type]}</S.Head>
+      <S.Head>
+        <Icon id={id} index={index + 1} />
+      </S.Head>
       <Input
-        initialValue={text}
+        initialValue={text ?? question}
         fontColor={fontColor}
         handleInputChange={(value: string) => dispatch(editOption({ id, index, option: value }))}
         disabled={disabled}
