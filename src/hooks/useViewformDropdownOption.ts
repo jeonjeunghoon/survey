@@ -1,21 +1,20 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store';
+import {
+  selectQuestionOptionListById,
+  selectSelectedSingleOptionById,
+} from '../store/form/selectors';
 import { selectSingleOption } from '../store/form/formSlice';
 
 import { DropdownMenu } from '../types/dropdown';
 
 export const useViewformDropdownOption = (id: number) => {
-  const optionList = useSelector(
-    (state: RootState) =>
-      state.form.questionList.find((question) => question.id === id)!.optionList,
-  );
-  const selectedOption = useSelector(
-    (state: RootState) =>
-      state.form.questionList.find((question) => question.id === id)!.selectedSingleOption,
-  );
+  const optionList = useSelector(selectQuestionOptionListById(id));
+  const selectedSingleOption = useSelector(selectSelectedSingleOptionById(id));
   const dispatch = useDispatch();
 
-  const defaultOption = selectedOption ? { text: selectedOption.option } : { text: '선택' };
+  const defaultOption = selectedSingleOption
+    ? { text: selectedSingleOption.option }
+    : { text: '선택' };
 
   const dropdownOptionList: DropdownMenu[] = [
     {

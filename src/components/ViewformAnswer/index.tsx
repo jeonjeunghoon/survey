@@ -1,5 +1,8 @@
 import styled from '@emotion/styled';
 
+import { useSelector } from 'react-redux';
+import { selectQuestionTypeById } from '../../store/form/selectors';
+
 import { QUESTION_TYPE } from '../../constants/question';
 import { useViewformAnswer } from '../../hooks/useViewformAnswer';
 
@@ -11,7 +14,8 @@ type Props = {
 };
 
 export default function ViewformAnswer({ id, disabled = false }: Props) {
-  const { type, initialAnswer, changeAnswer } = useViewformAnswer(id);
+  const { answer, changeAnswer } = useViewformAnswer(id);
+  const type = useSelector(selectQuestionTypeById(id));
   const answerWidthTable = {
     width: type === QUESTION_TYPE.단답형 ? '50%' : '100%',
   };
@@ -19,7 +23,7 @@ export default function ViewformAnswer({ id, disabled = false }: Props) {
   return (
     <S.AnswerWrapper width={answerWidthTable.width}>
       <Input
-        initialValue={initialAnswer}
+        initialValue={answer}
         placeholder='내 답변'
         handleInputChange={changeAnswer}
         disabled={disabled}

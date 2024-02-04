@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store';
 import { storeAnswer } from '../store/form/formSlice';
+import { selectQuestionIsAnswerById } from '../store/form/selectors';
 
 export const useViewformAnswer = (id: number) => {
-  const questionList = useSelector((state: RootState) => state.form.questionList);
+  const answer = useSelector(selectQuestionIsAnswerById(id));
   const dispatch = useDispatch();
-  const type = questionList[0].type;
-  const initialAnswer = questionList!.find((question) => question.id === id)?.answer ?? '';
-  const changeAnswer = (answer: string | null) => dispatch(storeAnswer({ id, answer }));
 
-  return { type, initialAnswer, changeAnswer };
+  const changeAnswer = (newAnswer: string | null) =>
+    dispatch(storeAnswer({ id, answer: newAnswer }));
+
+  return { answer: answer ?? '', changeAnswer };
 };

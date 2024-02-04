@@ -1,11 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store';
+import {
+  selectQuestionHasOtherOptionById,
+  selectQuestionOptionListById,
+  selectQuestionOtherOptionById,
+  selectSelectedMultipleOptionById,
+} from '../store/form/selectors';
 import { selectMultipleOption } from '../store/form/formSlice';
 
 export const useViewformCheckbox = (id: number) => {
-  const { optionList, selectedMultipleOption, otherOption, hasOtherOption } = useSelector(
-    (state: RootState) => state.form.questionList.find((question) => question.id === id)!,
-  );
+  const optionList = useSelector(selectQuestionOptionListById(id));
+  const otherOption = useSelector(selectQuestionOtherOptionById(id));
+  const hasOtherOption = useSelector(selectQuestionHasOtherOptionById(id));
+  const selectedMultipleOption = useSelector(selectSelectedMultipleOptionById(id));
   const dispatch = useDispatch();
 
   const selectedOptionList = selectedMultipleOption?.map(({ option }) => option) ?? [];

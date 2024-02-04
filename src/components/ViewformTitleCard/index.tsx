@@ -1,14 +1,14 @@
 import styled from '@emotion/styled';
 
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { hasRequiredSelector } from '../../store/form/selectors';
 
 import TitleCard from '../TitleCard';
 import FormTitleText from '../../components/FormTitleText';
 import FormDescriptionText from '../../components/FormDescriptionText';
 
 export default function ViewformTitleCard() {
-  const { hasRequired } = useSelector((state: RootState) => state.form);
+  const hasRequired = useSelector(hasRequiredSelector);
 
   return (
     <TitleCard>

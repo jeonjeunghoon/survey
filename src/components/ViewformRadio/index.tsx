@@ -1,7 +1,7 @@
 import { useViewformRadio } from '../../hooks/useViewformRadio';
-import OtherOption from '../OtherOption';
 
 import Radio from '../common/Radio';
+import OtherOption from '../OtherOption';
 
 type Props = {
   id: number;

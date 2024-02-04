@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { titleSelector } from '../../store/form/selectors';
 
 export default function FormTitleText() {
-  const { title } = useSelector((state: RootState) => state.form);
+  const title = useSelector(titleSelector);
 
   return (
     <S.Wrapper>

@@ -1,12 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store';
 import { selectSingleOption } from '../store/form/formSlice';
+import {
+  selectQuestionHasOtherOptionById,
+  selectQuestionOptionListById,
+  selectQuestionOtherOptionById,
+  selectSelectedSingleOptionById,
+} from '../store/form/selectors';
 
 export const useViewformRadio = (id: number) => {
-  const { optionList, selectedSingleOption, otherOption, hasOtherOption } = useSelector(
-    (state: RootState) => state.form.questionList.find((question) => question.id === id)!,
-  );
-
+  const optionList = useSelector(selectQuestionOptionListById(id));
+  const otherOption = useSelector(selectQuestionOtherOptionById(id));
+  const hasOtherOption = useSelector(selectQuestionHasOtherOptionById(id));
+  const selectedSingleOption = useSelector(selectSelectedSingleOptionById(id));
   const dispatch = useDispatch();
 
   const changeSelectedOption = (selectedOption: { option: string; index: number } | null) => {

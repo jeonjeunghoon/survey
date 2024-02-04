@@ -122,14 +122,8 @@ export const formSlice = createSlice({
     },
 
     storeAnswer: (state, action: PayloadAction<{ id: number; answer: string | null }>) => {
-      const { answer } = action.payload;
-
-      const { questionList } = state;
-
-      if (answer === null) return;
-
-      const targetIndex = findTargetIndexById(questionList, action.payload.id);
-      questionList[targetIndex].answer = answer;
+      const targetIndex = findTargetIndexById(state.questionList, action.payload.id);
+      state.questionList[targetIndex].answer = action.payload.answer;
     },
 
     selectSingleOption: (
@@ -139,12 +133,8 @@ export const formSlice = createSlice({
         selectedOption: { option: string; index: number } | null;
       }>,
     ) => {
-      const { id, selectedOption } = action.payload;
-
-      const { questionList } = state;
-
-      const targetIndex = findTargetIndexById(questionList, id);
-      questionList[targetIndex].selectedSingleOption = selectedOption;
+      const targetIndex = findTargetIndexById(state.questionList, action.payload.id);
+      state.questionList[targetIndex].selectedSingleOption = action.payload.selectedOption;
     },
 
     selectMultipleOption: (
@@ -154,12 +144,8 @@ export const formSlice = createSlice({
         selectedOptionList: { option: string; index: number }[] | null;
       }>,
     ) => {
-      const { id, selectedOptionList } = action.payload;
-
-      const { questionList } = state;
-
-      const targetIndex = findTargetIndexById(questionList, id);
-      questionList[targetIndex].selectedMultipleOption = selectedOptionList;
+      const targetIndex = findTargetIndexById(state.questionList, action.payload.id);
+      state.questionList[targetIndex].selectedMultipleOption = action.payload.selectedOptionList;
     },
 
     setOtherOption: (state, action: PayloadAction<{ id: number; option: string }>) => {

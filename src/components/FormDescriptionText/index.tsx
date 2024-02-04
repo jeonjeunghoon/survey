@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { descriptionSelector } from '../../store/form/selectors';
 
 export default function FormDescriptionText() {
-  const { description } = useSelector((state: RootState) => state.form);
+  const description = useSelector(descriptionSelector);
 
   if (!description) return null;
 

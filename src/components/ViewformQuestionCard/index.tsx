@@ -1,27 +1,29 @@
 import styled from '@emotion/styled';
 
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import {
+  selectQuestionById,
+  selectQuestionIsRequiredById,
+  selectQuestionTypeById,
+} from '../../store/form/selectors';
 
-import { QuestionType } from '../../types/question';
+import { QUESTION_TYPE } from '../../constants/question';
 
 import Card from '../Card';
 import ViewformAnswer from '../ViewformAnswer';
 import ViewformDropdown from '../ViewformDropdown';
 import ViewformCheckbox from '../ViewformCheckbox';
 import ViewformRadio from '../ViewformRadio';
-import { QUESTION_TYPE } from '../../constants/question';
 
 type Props = {
   id: number;
-  type: QuestionType;
   disabled?: boolean;
 };
 
-export default function ViewformQuestionCard({ id, type, disabled = false }: Props) {
-  const { question, isRequired } = useSelector(
-    (state: RootState) => state.form.questionList.find((question) => question.id === id)!,
-  );
+export default function ViewformQuestionCard({ id, disabled = false }: Props) {
+  const type = useSelector(selectQuestionTypeById(id));
+  const question = useSelector(selectQuestionById(id));
+  const isRequired = useSelector(selectQuestionIsRequiredById(id));
 
   const ANSWER_RENDER_TABLE = {
     [QUESTION_TYPE.단답형]: <ViewformAnswer id={id} disabled={disabled} />,
