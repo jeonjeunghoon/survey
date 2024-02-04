@@ -11,14 +11,14 @@ export const useDragAndDrop = () => {
   const dropAndGetNewList = <T>(list: T[]): T[] => {
     if (list === null || dragItem.current === null || dragOverItem.current === null) return list;
 
-    const newQuestionList = [...list];
-    const dragItemValue = newQuestionList[dragItem.current];
-    newQuestionList.splice(dragItem.current, 1);
-    newQuestionList.splice(dragOverItem.current, 0, dragItemValue);
+    const newList = [...list];
+    const dragItemValue = newList[dragItem.current];
+    newList.splice(dragItem.current, 1);
+    newList.splice(dragOverItem.current, 0, dragItemValue);
     dragItem.current = null;
     dragOverItem.current = null;
 
-    return newQuestionList;
+    return newList;
   };
 
   const handleDragOver = <T>(event: DragEvent<T>) => event.preventDefault();

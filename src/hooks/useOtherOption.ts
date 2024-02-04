@@ -4,7 +4,7 @@ import { RootState } from '../store';
 
 export const useOtherOption = (id: number) => {
   const { hasOtherOption, otherOption } = useSelector(
-    (state: RootState) => state.form.questionList!.find((question) => question.id === id)!,
+    (state: RootState) => state.form.questionList.find((question) => question.id === id)!,
   );
 
   const dispatch = useDispatch();

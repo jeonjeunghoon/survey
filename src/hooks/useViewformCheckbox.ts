@@ -4,7 +4,7 @@ import { selectMultipleOption } from '../store/form/formSlice';
 
 export const useViewformCheckbox = (id: number) => {
   const { optionList, selectedMultipleOption, otherOption, hasOtherOption } = useSelector(
-    (state: RootState) => state.form.questionList!.find((question) => question.id === id)!,
+    (state: RootState) => state.form.questionList.find((question) => question.id === id)!,
   );
   const dispatch = useDispatch();
 

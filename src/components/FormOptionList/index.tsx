@@ -15,7 +15,7 @@ type Props = {
 
 export default function FormOptionList({ id }: Props) {
   const { optionList, type, hasOtherOption } = useSelector(
-    (state: RootState) => state.form.questionList!.find((question) => question.id === id)!,
+    (state: RootState) => state.form.questionList.find((question) => question.id === id)!,
   );
 
   const dispatch = useDispatch();

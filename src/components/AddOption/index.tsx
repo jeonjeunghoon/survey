@@ -17,7 +17,7 @@ type Props = {
 
 export default function AddOption({ id }: Props) {
   const { type, hasOtherOption, optionList } = useSelector(
-    (state: RootState) => state.form.questionList!.find((question) => question.id === id)!,
+    (state: RootState) => state.form.questionList.find((question) => question.id === id)!,
   );
   const dispatch = useDispatch();
   const OPTION_ICON_TABLE = {

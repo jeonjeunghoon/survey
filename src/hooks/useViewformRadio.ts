@@ -4,7 +4,7 @@ import { selectSingleOption } from '../store/form/formSlice';
 
 export const useViewformRadio = (id: number) => {
   const { optionList, selectedSingleOption, otherOption, hasOtherOption } = useSelector(
-    (state: RootState) => state.form.questionList!.find((question) => question.id === id)!,
+    (state: RootState) => state.form.questionList.find((question) => question.id === id)!,
   );
 
   const dispatch = useDispatch();

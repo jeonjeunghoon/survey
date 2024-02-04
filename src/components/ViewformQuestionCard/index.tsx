@@ -20,7 +20,7 @@ type Props = {
 
 export default function ViewformQuestionCard({ id, type, disabled = false }: Props) {
   const { question, isRequired } = useSelector(
-    (state: RootState) => state.form.questionList!.find((question) => question.id === id)!,
+    (state: RootState) => state.form.questionList.find((question) => question.id === id)!,
   );
 
   const ANSWER_RENDER_TABLE = {

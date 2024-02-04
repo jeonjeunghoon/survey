@@ -7,11 +7,11 @@ import { DropdownMenu } from '../types/dropdown';
 export const useViewformDropdownOption = (id: number) => {
   const optionList = useSelector(
     (state: RootState) =>
-      state.form.questionList!.find((question) => question.id === id)!.optionList,
+      state.form.questionList.find((question) => question.id === id)!.optionList,
   );
   const selectedOption = useSelector(
     (state: RootState) =>
-      state.form.questionList!.find((question) => question.id === id)!.selectedSingleOption,
+      state.form.questionList.find((question) => question.id === id)!.selectedSingleOption,
   );
   const dispatch = useDispatch();
 

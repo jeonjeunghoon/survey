@@ -13,8 +13,6 @@ export default function FormQuestionCardList() {
   const { handleDragStart, handleDragEnter, handleDragOver, dropAndGetNewList } = useDragAndDrop();
   const dispatch = useDispatch();
 
-  if (!questionList || !questionList.length) return null;
-
   return (
     <ul>
       {questionList.map(({ id, type, question, optionList, hasOtherOption }, index) => {

@@ -8,8 +8,6 @@ import ViewformQuestionCard from '../ViewformQuestionCard';
 export default function ReplyList() {
   const { questionList } = useSelector((state: RootState) => state.form);
 
-  if (!questionList || !questionList.length) return null;
-
   return (
     <ul>
       {questionList.map(({ id, type }) => {
