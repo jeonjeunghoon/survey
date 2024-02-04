@@ -3,23 +3,18 @@ import { RootState } from '../store';
 import { selectMultipleOption } from '../store/form/formSlice';
 
 export const useViewformCheckbox = (id: number) => {
-  const optionList = useSelector(
-    (state: RootState) =>
-      state.form.questionList!.find((question) => question.id === id)!.optionList,
-  );
-  const selectedMultipleOption = useSelector(
-    (state: RootState) =>
-      state.form.questionList!.find((question) => question.id === id)!.selectedMultipleOption,
+  const { optionList, selectedMultipleOption } = useSelector(
+    (state: RootState) => state.form.questionList!.find((question) => question.id === id)!,
   );
   const dispatch = useDispatch();
 
   const selectedOptionList = selectedMultipleOption?.map(({ option }) => option) ?? [];
 
-  const changeSelectedOptionList = (optionList: string[]) => {
+  const changeSelectedOptionList = (selectedOptionList: string[]) => {
     dispatch(
       selectMultipleOption({
         id,
-        selectedOptionList: optionList.map((option, index) => ({
+        selectedOptionList: selectedOptionList.map((option, index) => ({
           option,
           index,
         })),
