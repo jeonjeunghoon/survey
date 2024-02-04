@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../store';
+import { titleSelector } from '../../store/form/selectors';
 import { editTitle } from '../../store/form/formSlice';
 
 import Textarea from '../common/Textarea';
 
 export default function FormTitleTextarea() {
-  const { title } = useSelector((state: RootState) => state.form);
+  const title = useSelector(titleSelector);
   const dispatch = useDispatch();
 
   return (
@@ -16,7 +16,7 @@ export default function FormTitleTextarea() {
         fontSize='3.6rem'
         placeholder='설문지 제목'
         initialValue={title}
-        handleTextareaChange={(value?: string) => dispatch(editTitle({ title: value }))}
+        handleTextareaChange={(value: string) => dispatch(editTitle({ title: value }))}
         hasBorderBottom={false}
       />
     </S.Wrapper>

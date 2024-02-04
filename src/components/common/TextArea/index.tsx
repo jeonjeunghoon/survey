@@ -17,7 +17,7 @@ type Props = {
   isFocus?: boolean;
   hasBorderBottom?: boolean;
   placeholder?: string;
-  handleTextareaChange?: (value?: string) => void;
+  handleTextareaChange?: (value: string) => void;
 } & ComponentPropsWithoutRef<'textarea'>;
 
 export default function Textarea({

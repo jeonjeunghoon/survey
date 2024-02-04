@@ -2,33 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Question, QuestionType } from '../../types/question';
 import { QUESTION_TYPE } from '../../constants/question';
-
-type FormState = {
-  title: string;
-  description: string;
-  hasRequired: boolean;
-  questionList: Question[];
-};
-
-const INITIAL_QUESTION: Question = {
-  id: 0,
-  type: 'singleChoice',
-  question: '제목없는 질문',
-  optionList: ['옵션 1'],
-  otherOption: null,
-  answer: null,
-  selectedSingleOption: null,
-  selectedMultipleOption: null,
-  hasOtherOption: false,
-  isRequired: false,
-};
-
-const initialState: FormState = {
-  title: '제목 없는 설문지',
-  description: '',
-  hasRequired: false,
-  questionList: [INITIAL_QUESTION],
-};
+import { initialState, INITIAL_QUESTION } from './state';
 
 const findTargetIndex = (questionList: Question[], id: number) =>
   questionList.findIndex((question) => question.id === id);
@@ -37,12 +11,8 @@ export const formSlice = createSlice({
   name: 'form',
   initialState,
   reducers: {
-    editTitle: (state, action: PayloadAction<{ title?: string }>) => {
-      const { title } = action.payload;
-
-      if (title === undefined) return;
-
-      state.title = title;
+    editTitle: (state, action: PayloadAction<{ title: string }>) => {
+      state.title = action.payload.title;
     },
 
     editDescription: (state, action: PayloadAction<{ description?: string }>) => {
