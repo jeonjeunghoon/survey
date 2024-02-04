@@ -18,5 +18,9 @@ export const useInput = (initialValue: string, handleInputChange?: (value: strin
     }
   }, [debouncedValue]);
 
+  useEffect(() => {
+    setValue(initialValue);
+  }, [initialValue]);
+
   return { value, isFocus, setValue, handleFocus, handleBlur };
 };

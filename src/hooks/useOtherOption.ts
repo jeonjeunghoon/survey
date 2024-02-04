@@ -6,6 +6,7 @@ export const useOtherOption = (id: number) => {
   const { hasOtherOption, otherOption } = useSelector(
     (state: RootState) => state.form.questionList!.find((question) => question.id === id)!,
   );
+
   const dispatch = useDispatch();
 
   const changeOtherOption = (option: string) => dispatch(setOtherOption({ id, option }));

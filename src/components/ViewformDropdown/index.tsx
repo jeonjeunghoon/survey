@@ -1,5 +1,3 @@
-// import styled from '@emotion/styled';
-
 import { useViewformDropdownOption } from '../../hooks/useViewformDropdownOption';
 
 import Dropdown from '../common/Dropdown';
@@ -13,7 +11,3 @@ export default function ViewformDropdown({ id }: Props) {
 
   return <Dropdown dropdownMenuList={dropdownOptionList} defaultMenu={defaultOption} />;
 }
-
-// const S = {
-//   Container: styled.div``,
-// };

@@ -251,6 +251,22 @@ export const formSlice = createSlice({
 
       target.otherOption = option;
     },
+
+    deleteReplies: (state) => {
+      if (!state.questionList) return;
+
+      const newQuestionList: Question[] = state.questionList.map((question) => {
+        return {
+          ...question,
+          otherOption: null,
+          answer: null,
+          selectedSingleOption: null,
+          selectedMultipleOption: null,
+        };
+      });
+
+      state.questionList = newQuestionList;
+    },
   },
 });
 
@@ -274,6 +290,7 @@ export const {
   selectSingleOption,
   selectMultipleOption,
   setOtherOption,
+  deleteReplies,
 } = formSlice.actions;
 
 export default formSlice.reducer;

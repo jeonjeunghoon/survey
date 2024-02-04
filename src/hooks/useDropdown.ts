@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useCheckFocusingDiv } from './useCheckFocusingDiv';
 import { DropdownMenu } from '../types/dropdown';
@@ -13,6 +13,10 @@ export const useDropdown = (defaultMenu: Omit<DropdownMenu, 'handleClick'>) => {
   const closeMenu = () => setIsOpen(false);
 
   const changeSelectedMenu = (menu: DropdownMenu) => setSelectedMenu(menu);
+
+  useEffect(() => {
+    setSelectedMenu(defaultMenu);
+  }, [defaultMenu]);
 
   return { isOpen, selectedMenu, ref, isFocus, showMenu, closeMenu, changeSelectedMenu };
 };
