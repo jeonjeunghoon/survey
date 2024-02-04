@@ -1,6 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { selectSingleOption } from '../../store/form/formSlice';
+import { useViewformRadio } from '../../hooks/useViewformRadio';
 
 import Radio from '../common/Radio';
 
@@ -9,20 +7,7 @@ type Props = {
 };
 
 export default function ViewformRadio({ id }: Props) {
-  const { optionList, selectedSingleOption } = useSelector(
-    (state: RootState) => state.form.questionList!.find((question) => question.id === id)!,
-  );
-
-  const dispatch = useDispatch();
-
-  const changeSelectedOption = (selectedOption: { option: string; index: number } | null) => {
-    dispatch(
-      selectSingleOption({
-        id,
-        selectedOption,
-      }),
-    );
-  };
+  const { optionList, selectedSingleOption, changeSelectedOption } = useViewformRadio(id);
 
   return (
     <>
@@ -31,7 +16,7 @@ export default function ViewformRadio({ id }: Props) {
           <Radio
             key={`${index}-${option}`}
             value={option}
-            selectedValue={selectedSingleOption!.option}
+            selectedValue={selectedSingleOption}
             handleRadioChange={() => changeSelectedOption({ option, index })}
           >
             {option}
