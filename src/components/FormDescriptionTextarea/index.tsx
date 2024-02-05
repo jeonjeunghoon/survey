@@ -1,13 +1,14 @@
 import styled from '@emotion/styled';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { descriptionSelector } from '../../store/form/selectors';
+import { currentFocusedCardIdSelector, descriptionSelector } from '../../store/form/selectors';
 import { editDescription } from '../../store/form/formSlice';
 
 import Textarea from '../common/Textarea';
 
 export default function FormDescriptionTextarea() {
   const description = useSelector(descriptionSelector);
+  const currentFocusedCardId = useSelector(currentFocusedCardIdSelector);
   const dispatch = useDispatch();
 
   return (
@@ -16,7 +17,8 @@ export default function FormDescriptionTextarea() {
         placeholder='설문지 설명'
         initialValue={description}
         handleTextareaChange={(value: string) => dispatch(editDescription({ description: value }))}
-        hasBorderBottom={false}
+        hasBorderBottom={currentFocusedCardId === null}
+        borderColor='#e0e0e0'
       />
     </S.Wrapper>
   );

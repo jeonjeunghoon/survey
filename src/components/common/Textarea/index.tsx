@@ -16,6 +16,7 @@ type Props = {
   margin?: string;
   isFocus?: boolean;
   hasBorderBottom?: boolean;
+  borderColor?: string;
   placeholder?: string;
   handleTextareaChange?: (value: string) => void;
 } & ComponentPropsWithoutRef<'textarea'>;
@@ -29,6 +30,7 @@ export default function Textarea({
   margin = '',
   isFocus = false,
   hasBorderBottom = true,
+  borderColor = 'black',
   placeholder,
   handleTextareaChange,
   ...rest
@@ -45,7 +47,11 @@ export default function Textarea({
   };
 
   return (
-    <S.Container hasBorderBottom={hasBorderBottom} backgroundColor={backgroundColor}>
+    <S.Container
+      hasBorderBottom={hasBorderBottom}
+      borderColor={borderColor}
+      backgroundColor={backgroundColor}
+    >
       <S.Textarea
         fontSize={fontSize}
         fontWeight={fontWeight}
@@ -63,12 +69,13 @@ export default function Textarea({
 }
 
 const S = {
-  Container: styled.div<{ hasBorderBottom: boolean; backgroundColor: string }>`
+  Container: styled.div<{ hasBorderBottom: boolean; borderColor: string; backgroundColor: string }>`
     display: flex;
     flex: 1;
     position: relative;
 
     border-bottom: ${({ hasBorderBottom }) => (hasBorderBottom ? '1px solid black' : '')};
+    border-color: ${({ borderColor }) => borderColor};
     background-color: ${({ backgroundColor }) => backgroundColor};
   `,
 
