@@ -5,6 +5,7 @@ type FormState = {
   description: string;
   hasRequired: boolean;
   questionList: Question[];
+  currentFocusedCardId: number | null;
 };
 
 export const INITIAL_QUESTION: Question = {
@@ -25,4 +26,5 @@ export const initialState: FormState = {
   description: '',
   hasRequired: false,
   questionList: [INITIAL_QUESTION],
+  currentFocusedCardId: null,
 };

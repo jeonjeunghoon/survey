@@ -7,6 +7,10 @@ export const descriptionSelector = (state: RootState) => state.form.description;
 
 export const questionListSelector = (state: RootState) => state.form.questionList;
 
+export const isTitleFocusSelector = (state: RootState) => state.form.currentFocusedCardId === null;
+
+export const currentFocusedCardIdSelector = (state: RootState) => state.form.currentFocusedCardId;
+
 export const questionFormSelector = (id: number) => (state: RootState) => {
   const questionForm = state.form.questionList.find((question) => question.id === id);
   if (!questionForm) throw new Error('잘못된 id입니다.');
@@ -15,19 +19,6 @@ export const questionFormSelector = (id: number) => (state: RootState) => {
 };
 
 export const hasRequiredSelector = (state: RootState) => state.form.hasRequired;
-
-// const INITIAL_QUESTION = {
-//   id: 0,
-//   type: 'singleChoice',
-//   question: '제목없는 질문',
-//   optionList: ['옵션 1'],
-//   otherOption: null,
-//   answer: null,
-//   selectedSingleOption: null,
-//   selectedMultipleOption: null,
-//   hasOtherOption: false,
-//   isRequired: false,
-// };
 
 export const selectQuestionById = (id: number) =>
   createSelector([questionFormSelector(id)], (questionForm) => questionForm.question);

@@ -20,13 +20,17 @@ export const formSlice = createSlice({
     },
 
     addSingleChoiceQuestion: (state) => {
+      const id = state.questionList
+        ? Math.max(...state.questionList.map((question) => question.id)) + 1
+        : 0;
+
       state.questionList.push({
         ...INITIAL_QUESTION,
         question: '',
-        id: state.questionList
-          ? Math.max(...state.questionList.map((question) => question.id)) + 1
-          : 0,
+        id,
       });
+
+      state.currentFocusedCardId = id;
     },
 
     editType: (state, action: PayloadAction<{ id: number; type: QuestionType }>) => {
@@ -185,6 +189,10 @@ export const formSlice = createSlice({
       const targetIndex = findTargetIndexById(questionList, action.payload.id);
       state.questionList[targetIndex].optionList = action.payload.optionList;
     },
+
+    updateCurrentFocusedCardId: (state, action: PayloadAction<{ id: number | null }>) => {
+      state.currentFocusedCardId = action.payload.id;
+    },
   },
 });
 
@@ -209,6 +217,7 @@ export const {
   deleteReplies,
   changeQuestionOrder,
   changeOptionOrder,
+  updateCurrentFocusedCardId,
 } = formSlice.actions;
 
 export default formSlice.reducer;

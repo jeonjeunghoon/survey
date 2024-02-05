@@ -2,13 +2,20 @@ import { PropsWithChildren } from 'react';
 
 import styled from '@emotion/styled';
 
+import { useSelector } from 'react-redux';
+import { isTitleFocusSelector } from '../../store/form/selectors';
+
 import Card from '../Card';
+import { useFocusingCardRef } from '../../hooks/useFocusingCardRef';
 
 export default function TitleCard({ children }: PropsWithChildren) {
+  const isTitleFocus = useSelector(isTitleFocusSelector);
+  const ref = useFocusingCardRef(null);
+
   return (
-    <Card>
+    <Card isFocus={isTitleFocus}>
       <S.RoundedEdgeTopCover />
-      <S.FormContainer>{children}</S.FormContainer>
+      <S.FormContainer ref={ref}>{children}</S.FormContainer>
     </Card>
   );
 }

@@ -2,13 +2,13 @@ import { PropsWithChildren } from 'react';
 
 import styled from '@emotion/styled';
 
-import { useCheckFocusingDiv } from '../../hooks/useCheckFocusingDiv';
+type Props = {
+  isFocus?: boolean;
+} & PropsWithChildren;
 
-export default function Card({ children }: PropsWithChildren) {
-  const { ref, isFocus } = useCheckFocusingDiv(false);
-
+export default function Card({ isFocus = false, children }: Props) {
   return (
-    <S.Section ref={ref}>
+    <S.Section>
       {isFocus && <S.RoundedEdgeLeftCover />}
       {children}
     </S.Section>

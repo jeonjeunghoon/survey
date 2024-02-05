@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { selectQuestionTypeById } from '../../store/form/selectors';
+import { currentFocusedCardIdSelector, selectQuestionTypeById } from '../../store/form/selectors';
 import { deleteQuestion, pasteQuestion, toggleRequired } from '../../store/form/formSlice';
 
 import { isRenderAnswer } from '../../constants/option';
-import { useCheckFocusingDiv } from '../../hooks/useCheckFocusingDiv';
+import { useFocusingCardRef } from '../../hooks/useFocusingCardRef';
 
 import Button from '../common/Button';
 import PasteIcon from '../../assets/svg/copy-document.svg?react';
@@ -23,16 +23,17 @@ type Props = {
 
 export default function FormQuestionCard({ id }: Props) {
   const type = useSelector(selectQuestionTypeById(id));
-  const { ref, isFocus } = useCheckFocusingDiv(false);
+  const currentFocusedCardId = useSelector(currentFocusedCardIdSelector);
   const dispatch = useDispatch();
+  const ref = useFocusingCardRef(id);
 
   return (
-    <Card>
+    <Card isFocus={id === currentFocusedCardId}>
       <S.FormQuestionCardContainer ref={ref}>
         <S.DragWrapper />
         <S.Container>
           <S.HeaderContainer>
-            <FormQuestion id={id} isFocus={isFocus} />
+            <FormQuestion id={id} />
             <QuestionTypeSelector id={id} />
           </S.HeaderContainer>
           <>

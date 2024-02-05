@@ -8,10 +8,9 @@ import Textarea from '../common/Textarea';
 
 type Props = {
   id: number;
-  isFocus: boolean;
 };
 
-export default function FormQuestion({ id, isFocus }: Props) {
+export default function FormQuestion({ id }: Props) {
   const question = useSelector(selectQuestionById(id));
   const dispatch = useDispatch();
 
@@ -23,7 +22,6 @@ export default function FormQuestion({ id, isFocus }: Props) {
         backgroundColor='#F2F2F2'
         margin='16px'
         placeholder='질문'
-        isFocus={isFocus}
         handleTextareaChange={(value: string) => dispatch(editQuestion({ id, question: value }))}
       />
     </S.QuestionWrapper>
