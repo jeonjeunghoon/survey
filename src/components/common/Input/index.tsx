@@ -14,6 +14,7 @@ type Props = {
   fontColor?: string;
   placeholder?: string;
   backgroundColor?: string;
+  hasHover?: boolean;
   handleInputChange?: (value: string) => void;
 } & ComponentPropsWithoutRef<'input'>;
 
@@ -24,6 +25,7 @@ export default function Input({
   fontWeight = 400,
   fontColor = 'black',
   backgroundColor = 'inherit',
+  hasHover = true,
   placeholder,
   handleInputChange,
   ...rest
@@ -43,6 +45,7 @@ export default function Input({
         fontColor={fontColor}
         placeholder={placeholder}
         backgroundColor={backgroundColor}
+        hasHover={hasHover}
         onChange={(event) => setValue(event.currentTarget.value)}
         onFocus={handleFocus}
         onBlur={handleBlur}
@@ -66,6 +69,7 @@ const S = {
     fontWeight: number;
     fontColor: string;
     backgroundColor: string;
+    hasHover: boolean;
   }>`
     width: 100%;
     padding: 8px 0;
@@ -79,7 +83,7 @@ const S = {
     letter-spacing: 0;
 
     &:hover {
-      border-bottom: 1px dotted #e0e0e0;
+      border-bottom: ${({ hasHover }) => hasHover && '1px dotted #e0e0e0'};
     }
   `,
 };

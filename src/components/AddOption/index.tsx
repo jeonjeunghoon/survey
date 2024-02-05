@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOption, addOtherOption } from '../../store/form/formSlice';
 import {
+  isFocusSelectorById,
   selectQuestionHasOtherOptionById,
   selectQuestionOptionListById,
   selectQuestionTypeById,
@@ -21,8 +22,11 @@ export default function AddOption({ id }: Props) {
   const type = useSelector(selectQuestionTypeById(id));
   const optionList = useSelector(selectQuestionOptionListById(id));
   const hasOtherOption = useSelector(selectQuestionHasOtherOptionById(id));
+  const isFocus = useSelector(isFocusSelectorById(id));
 
   const dispatch = useDispatch();
+
+  if (!isFocus) return null;
 
   return (
     <S.AddOptionContainer>

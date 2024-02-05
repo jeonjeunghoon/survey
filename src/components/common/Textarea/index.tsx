@@ -1,9 +1,10 @@
-import { ChangeEvent, ComponentPropsWithoutRef, useRef } from 'react';
+import { ComponentPropsWithoutRef, useRef } from 'react';
 
 import styled from '@emotion/styled';
 
-import { useInput } from '../../../hooks/useInput';
 import { useAdjustTextareaHeight } from '../../../hooks/useAdjustTextareaHeight';
+import { useCheckFocusingDiv } from '../../../hooks/useCheckFocusingDiv';
+import { useTextarea } from '../../../hooks/useTextarea';
 
 import BottomBorderAnimation from '../BottomBorderAnimation';
 
@@ -14,7 +15,7 @@ type Props = {
   rows?: number;
   backgroundColor?: string;
   margin?: string;
-  isFocus?: boolean;
+  initialFocus?: boolean;
   hasBorderBottom?: boolean;
   borderColor?: string;
   placeholder?: string;
@@ -28,26 +29,21 @@ export default function Textarea({
   rows = 1,
   backgroundColor = 'inherit',
   margin = '',
-  isFocus = false,
+  initialFocus = false,
   hasBorderBottom = true,
   borderColor = 'black',
   placeholder,
   handleTextareaChange,
   ...rest
 }: Props) {
-  const { value, setValue } = useInput(initialValue);
+  const { value, setValue, handleBlur } = useTextarea(initialValue, handleTextareaChange);
+  const { divRef, isFocus } = useCheckFocusingDiv(initialFocus);
   const ref = useRef<HTMLTextAreaElement>(null);
   useAdjustTextareaHeight(ref, value);
 
-  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    const text = event.currentTarget.value;
-
-    if (handleTextareaChange) handleTextareaChange(text);
-    setValue(text);
-  };
-
   return (
     <S.Container
+      ref={divRef}
       hasBorderBottom={hasBorderBottom}
       borderColor={borderColor}
       backgroundColor={backgroundColor}
@@ -60,7 +56,8 @@ export default function Textarea({
         margin={margin}
         value={value}
         ref={ref}
-        onChange={handleChange}
+        onChange={(event) => setValue(event.target.value)}
+        onBlur={handleBlur}
         {...rest}
       />
       {isFocus && <BottomBorderAnimation startAnimation={isFocus} />}

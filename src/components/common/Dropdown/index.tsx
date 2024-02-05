@@ -18,11 +18,11 @@ export default function Dropdown({
   defaultMenu = dropdownMenuList[0],
   disabled = false,
 }: Props) {
-  const { isOpen, selectedMenu, ref, isFocus, showMenu, closeMenu, changeSelectedMenu } =
+  const { isOpen, selectedMenu, divRef, isFocus, showMenu, closeMenu, changeSelectedMenu } =
     useDropdown(defaultMenu);
 
   return (
-    <S.Container ref={ref} disabled={disabled}>
+    <S.Container ref={divRef} disabled={disabled}>
       <MenuList
         dropdownMenuList={dropdownMenuList}
         closeMenu={closeMenu}

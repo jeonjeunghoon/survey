@@ -1,5 +1,8 @@
 import styled from '@emotion/styled';
 
+import { useSelector } from 'react-redux';
+import { isFocusSelectorById } from '../../store/form/selectors';
+
 import { useQuestionTypeSet } from '../../hooks/useQuestionTypeSet';
 
 import Dropdown from '../common/Dropdown';
@@ -9,7 +12,10 @@ type Props = {
 };
 
 export default function QuestionTypeSelector({ id }: Props) {
+  const isFocus = useSelector(isFocusSelectorById(id));
   const { questionTypeList, defaultQuestionType } = useQuestionTypeSet(id);
+
+  if (!isFocus) return null;
 
   return (
     <S.DropdownWrapper>

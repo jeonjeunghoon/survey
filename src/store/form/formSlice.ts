@@ -20,7 +20,7 @@ export const formSlice = createSlice({
     },
 
     addSingleChoiceQuestion: (state) => {
-      const id = state.questionList
+      const id = state.questionList.length
         ? Math.max(...state.questionList.map((question) => question.id)) + 1
         : 0;
 
@@ -111,6 +111,10 @@ export const formSlice = createSlice({
       const targetIndex = findTargetIndexById(state.questionList, action.payload.id);
 
       state.questionList.splice(targetIndex, 1);
+      state.currentFocusedCardId =
+        state.questionList.length && targetIndex - 1 >= 0
+          ? state.questionList[targetIndex - 1].id
+          : null;
     },
 
     toggleRequired: (state, action: PayloadAction<{ id: number }>) => {

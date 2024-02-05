@@ -6,7 +6,7 @@ import { DropdownMenu } from '../types/dropdown';
 export const useDropdown = (defaultMenu: Omit<DropdownMenu, 'handleClick'>) => {
   const [selectedMenu, setSelectedMenu] = useState(defaultMenu);
   const [isOpen, setIsOpen] = useState(false);
-  const { ref, isFocus } = useCheckFocusingDiv(false);
+  const { divRef, isFocus } = useCheckFocusingDiv(false);
 
   const showMenu = () => setIsOpen(true);
 
@@ -18,5 +18,5 @@ export const useDropdown = (defaultMenu: Omit<DropdownMenu, 'handleClick'>) => {
     setSelectedMenu(defaultMenu);
   }, [defaultMenu]);
 
-  return { isOpen, selectedMenu, ref, isFocus, showMenu, closeMenu, changeSelectedMenu };
+  return { isOpen, selectedMenu, divRef, isFocus, showMenu, closeMenu, changeSelectedMenu };
 };

@@ -11,6 +11,9 @@ export const isTitleFocusSelector = (state: RootState) => state.form.currentFocu
 
 export const currentFocusedCardIdSelector = (state: RootState) => state.form.currentFocusedCardId;
 
+export const isFocusSelectorById = (id: number) => (state: RootState) =>
+  state.form.currentFocusedCardId === id;
+
 export const questionFormSelector = (id: number) => (state: RootState) => {
   const questionForm = state.form.questionList.find((question) => question.id === id);
   if (!questionForm) throw new Error('잘못된 id입니다.');

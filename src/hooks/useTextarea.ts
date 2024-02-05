@@ -1,6 +1,9 @@
 import { useState } from 'react';
 
-export const useInput = (initialValue: string, handleInputChange?: (value: string) => void) => {
+export const useTextarea = (
+  initialValue: string,
+  handleTextareaChange?: (value: string) => void,
+) => {
   const [value, setValue] = useState(initialValue);
   const [isFocus, setIsFocus] = useState(false);
 
@@ -8,7 +11,7 @@ export const useInput = (initialValue: string, handleInputChange?: (value: strin
 
   const handleBlur = () => {
     setIsFocus(false);
-    if (handleInputChange) handleInputChange(value);
+    if (handleTextareaChange) handleTextareaChange(value);
   };
 
   return { value, isFocus, setValue, handleFocus, handleBlur };

@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeOptionOrder, deleteOption, deleteOtherOption } from '../../store/form/formSlice';
 import {
+  isFocusSelectorById,
   selectQuestionHasOtherOptionById,
   selectQuestionOptionListById,
 } from '../../store/form/selectors';
@@ -19,6 +20,7 @@ type Props = {
 export default function FormOptionList({ id }: Props) {
   const optionList = useSelector(selectQuestionOptionListById(id));
   const hasOtherOption = useSelector(selectQuestionHasOtherOptionById(id));
+  const isFocus = useSelector(isFocusSelectorById(id));
   const dispatch = useDispatch();
 
   const hasDeleteButton = optionList.length > 1;
@@ -38,12 +40,12 @@ export default function FormOptionList({ id }: Props) {
           onDragOver={handleDragOver}
         >
           <FormOption id={id} option={option} index={index} />
-          {hasDeleteButton && (
+          {hasDeleteButton && isFocus && (
             <DeleteButton handleButtonClick={() => dispatch(deleteOption({ id, index }))} />
           )}
         </S.OptionItem>
       ))}
-      {hasOtherOption && (
+      {hasOtherOption && isFocus && (
         <S.OptionItem key={'otherOption'}>
           <FormOption
             id={id}

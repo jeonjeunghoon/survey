@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { editOption } from '../../store/form/formSlice';
 
 import Input from '../common/Input';
 import Icon from '../Icon';
+import { isFocusSelectorById } from '../../store/form/selectors';
 
 type Props = {
   id: number;
@@ -22,6 +23,7 @@ export default function FormOption({
   disabled = false,
 }: Props) {
   const dispatch = useDispatch();
+  const isFocus = useSelector(isFocusSelectorById(id));
 
   return (
     <S.Option>
@@ -33,6 +35,7 @@ export default function FormOption({
         fontColor={fontColor}
         handleInputChange={(value: string) => dispatch(editOption({ id, index, option: value }))}
         disabled={disabled}
+        hasHover={isFocus}
       />
     </S.Option>
   );
