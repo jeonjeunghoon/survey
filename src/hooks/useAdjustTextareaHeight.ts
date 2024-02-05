@@ -1,6 +1,6 @@
 import { RefObject, useEffect } from 'react';
 
-export const useResizeTextareaHeight = (ref: RefObject<HTMLTextAreaElement>, value: string) => {
+export const useAdjustTextareaHeight = (ref: RefObject<HTMLTextAreaElement>, value: string) => {
   useEffect(() => {
     const handleResizeHeight = () => {
       if (ref.current) {
